@@ -1,37 +1,53 @@
-import React, {useState} from 'react'
+import React, { useState } from "react";
 import { FaSearch } from "react-icons/fa";
-import "./SearchBar.css"
+import "./SearchBar.css";
 
+export const SearchBar = ({ setResults }) => {
+  const [input, setInput] = useState("");
 
-export const SearchBar = ({setResults}) => {
-    const [input, setInput] = useState("");
-    const fetchData = (value) => {
-        fetch("https://jsonplaceholder.typicode.com/users").then((response) => response.json()).then(json => {
-            const results = json.filter((user) => {
-                return (
-                    value && 
-                    user && 
-                    user.name && 
-                    user.name.toLowerCase().includes(value)
-                );
-            });
-            setResults(results)
-        });
-        
+  const companyData = async (value) => {
+    try {
+      const response = await fetch("http://10.10.210.156:3000/api/companies/");
+      if (!response.ok) {
+        throw new Error("Network response was not ok");
+      }
+      const companyData = await response.json();
+      const results = searchJSONData(companyData, value);
+      console.log("Filtered results:", results); // Debugging log
+      setResults(results);
+    } catch (error) {
+      console.error("Failed to fetch company data:", error);
+      setResults([]); // Set to empty array in case of error
     }
+  };
 
-    const handleChange = (value) => {
-        setInput(value)
-        fetchData(value);
+  const searchJSONData = (data, input) => {
+    const regex = new RegExp(input, "i");
+    const filteredData = data.filter((item) => {
+      return item.companyName && regex.test(item.companyName);
+    });
+    return filteredData.sort((a, b) => a.companyName.localeCompare(b.companyName));
+  };
+
+  const handleChange = (value) => {
+    setInput(value);
+    if (value) {
+      companyData(value);
+    } else {
+      setResults([]); // Clear results if input is empty
     }
+  };
+
   return (
-    <div className='input-wrapper'>
-        <FaSearch id='search-icon' />
-        <input 
-        placeholder='Search for companies' 
-        value={input} 
-        onChange={(e) => handleChange(e.target.value)}/>
-        
+    <div className="search-container">
+      <div className='input-wrapper'>
+        <FaSearch id="search-icon" />
+        <input
+          placeholder="Search for companies"
+          value={input}
+          onChange={(e) => handleChange(e.target.value)}
+        />
+      </div>
     </div>
-  )
-}
+  );
+};
