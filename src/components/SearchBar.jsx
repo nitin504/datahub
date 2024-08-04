@@ -39,14 +39,17 @@ export const SearchBar = ({ setResults }) => {
   };
 
   return (
-    <div className="search-container">
-      <div className='input-wrapper'>
-        <FaSearch id="search-icon" />
-        <input
-          placeholder="Search for companies"
-          value={input}
-          onChange={(e) => handleChange(e.target.value)}
-        />
+    <div className="banner">
+      <div className="search-container">
+        <div className="input-wrapper">
+          <FaSearch id="search-icon" />
+          <input
+            type="text"
+            placeholder="Search for companies"
+            value={input}
+            onChange={(e) => handleChange(e.target.value)}
+          />
+        </div>
       </div>
     </div>
   );
