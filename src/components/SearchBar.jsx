@@ -7,7 +7,7 @@ export const SearchBar = ({ setResults }) => {
 
   const companyData = async (value) => {
     try {
-      const response = await fetch("http://10.10.210.156:3000/api/companies/");
+      const response = await fetch("http://192.168.137.1:3000/api/companies");
       if (!response.ok) {
         throw new Error("Network response was not ok");
       }
@@ -39,17 +39,14 @@ export const SearchBar = ({ setResults }) => {
   };
 
   return (
-    <div className="banner">
-      <div className="search-container">
-        <div className="input-wrapper">
-          <FaSearch id="search-icon" />
-          <input
-            type="text"
-            placeholder="Search for companies"
-            value={input}
-            onChange={(e) => handleChange(e.target.value)}
-          />
-        </div>
+    <div className="search-container">
+      <div className='input-wrapper'>
+        <FaSearch id="search-icon" />
+        <input
+          placeholder="Search for companies"
+          value={input}
+          onChange={(e) => handleChange(e.target.value)}
+        />
       </div>
     </div>
   );

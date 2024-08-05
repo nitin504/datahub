@@ -1,11 +1,11 @@
 .App {
-  background-color: #FFFFFF;
+  background-color: #eee;
   height: 100vh;
-  width: 100vw;
+  width: 100%;
 }
 
 .search-bar-container {
-  padding-top: 84px;
+  padding-top: 20vh;
   width: 50%;
   margin: auto;
   display: flex;
