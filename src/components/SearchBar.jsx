@@ -2,12 +2,12 @@ import React, { useState } from "react";
 import { FaSearch } from "react-icons/fa";
 import "./SearchBar.css";
 
-export const SearchBar = ({ setResults }) => {
+export const SearchBar = ({ setResults, inputValue, setInputValue }) => {
   const [input, setInput] = useState("");
 
   const companyData = async (value) => {
     try {
-      const response = await fetch("http://192.168.137.1:3000/api/companies");
+      const response = await fetch("http://192.168.1.36:3000/api/companies");
       if (!response.ok) {
         throw new Error("Network response was not ok");
       }
@@ -17,7 +17,7 @@ export const SearchBar = ({ setResults }) => {
       setResults(results);
     } catch (error) {
       console.error("Failed to fetch company data:", error);
-      setResults([]); // Set to empty array in case of error
+      setResults([]); 
     }
   };
 
@@ -31,10 +31,11 @@ export const SearchBar = ({ setResults }) => {
 
   const handleChange = (value) => {
     setInput(value);
+    setInputValue(value); 
     if (value) {
       companyData(value);
     } else {
-      setResults([]); // Clear results if input is empty
+      setResults([]); 
     }
   };
 

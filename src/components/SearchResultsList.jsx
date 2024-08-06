@@ -2,8 +2,12 @@ import React from 'react';
 import "./SearchResultsList.css";
 import { SearchResult } from './SearchResult';
 
-export const SearchResultsList = ({ results }) => {
+export const SearchResultsList = ({ results, inputValue }) => {
   console.log("Results list:", results);
+  if (!inputValue) {
+    return null; 
+  }
+
   return (
     <div className='results-list'>
       {results.length === 0 ? (

@@ -6,6 +6,7 @@ import "./App.css";
 
 const App = () => {
   const [results, setResults] = useState([]);
+  const [inputValue, setInputValue] = useState('');
 
   return (
     <div className='App'>
@@ -13,8 +14,8 @@ const App = () => {
           <Header />
         </div>
         <div className='search-bar-container'>
-          <SearchBar setResults={setResults} />
-          <SearchResultsList results={results} />
+          <SearchBar setResults={setResults} inputValue={inputValue} setInputValue={setInputValue} />
+          <SearchResultsList results={results} inputValue={inputValue} />
         </div>
     </div>
   );
