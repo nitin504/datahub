@@ -1,0 +1,42 @@
+/* CompanyList.css */
+
+/* Container for the entire table */
+.CompanyListTable {
+    padding: 20px;
+    background-color: #f8f8f8;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    margin-top: 20px;
+}
+
+/* Style the table title */
+.columns {
+    font-family: 'Sharp Sans', sans-serif;
+    font-size: 24px;
+    font-weight: bold;
+    color: #333;
+}
+
+/* Customize table header */
+.MuiTableHead-root {
+    background-color: #1976d2; /* Blue background */
+    color: white;
+}
+
+
+/* Hover effect for table rows */
+.MuiTableRow-root:hover {
+    background-color: #F7F9FF ;
+    cursor: pointer;
+}
+
+
+/* Style for selected rows */
+.Mui-selected {
+    background-color: #e0f7fa !important;
+}
+
+/* Customize table pagination */
+.MuiTablePagination-caption {
+    color: #333;
+}

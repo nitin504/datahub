@@ -7,7 +7,7 @@ export const SearchBar = ({ setResults, inputValue, setInputValue }) => {
 
   const companyData = async (value) => {
     try {
-      const response = await fetch("http://192.168.1.36:3000/api/companies");
+      const response = await fetch("http://192.168.137.21:3000/api/companies");
       if (!response.ok) {
         throw new Error("Network response was not ok");
       }
