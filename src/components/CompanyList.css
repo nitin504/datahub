@@ -1,7 +1,7 @@
 .company-list-container {
     width: 100%; /* Ensure the container is not wider than the screen */
     overflow-x: hidden; /* Prevent horizontal scrolling */
-    padding: 0 16px; /* Add padding if necessary */
+    
   }
   
   .expand-button {

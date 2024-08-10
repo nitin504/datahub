@@ -38,19 +38,56 @@ export const CompanyList = ({ results }) => {
 
   // Define columns with their labels and custom render function for Tech Stack
   const columns = [
-    { name: "companyName", label: "Company Name" },
-    { name: "state", label: "State" },
-    { name: "industry", label: "Industry" },
-    { name: "annualRevenue", label: "Annual Revenue" },
-    { name: "internalITTeam", label: "Internal IT Team" },
     {
-      name: "techStack",
-      label: "Tech Stack",
-      options: {
-        customBodyRender: renderTechStack
-      }
-    }
-  ];
+     name: "companyName",
+     label: "Company Name",
+     options: {
+      filter: false,
+      sort: true,
+     }
+    },
+    {
+     name: "state",
+     label: "State",
+     options: {
+      filter: true,
+      sort: true,
+     }
+    },
+    {
+     name: "industry",
+     label: "Industry",
+     options: {
+      filter: true,
+      sort: true,
+     }
+    },
+    {
+     name: "annualRevenue",
+     label: "Annual Revenue",
+     options: {
+      filter: false,
+      sort: true,
+     }
+    },
+    {
+     name: "internalITTeam",
+     label: "Internal IT Team",
+     options: {
+      filter: true,
+      sort: true,
+     }
+    },
+    {
+     name: "techStack",
+     label: "Tech Stack",
+     options: {
+      filter: false,
+      sort: false,
+      customBodyRender: renderTechStack,
+     }
+    },
+   ];
 
   // Format the data for the table
   const data = results.map(result => ({
