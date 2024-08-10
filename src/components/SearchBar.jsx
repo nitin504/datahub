@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { FaSearch } from "react-icons/fa";
 import "./SearchBar.css";
 
-export const SearchBar = ({ setResults, inputValue, setInputValue }) => {
+export const SearchBar = ({ setResults, inputValue, setInputValue, onSearch }) => {
   const [input, setInput] = useState("");
 
   const companyData = async (value) => {
@@ -39,6 +39,12 @@ export const SearchBar = ({ setResults, inputValue, setInputValue }) => {
     }
   };
 
+  const handleKeyDown = (e) => {
+    if (e.key === 'Enter') {
+      onSearch(input); 
+    }
+  };
+
   return (
     <div className="banner">
       <div className="search-container">
@@ -49,6 +55,7 @@ export const SearchBar = ({ setResults, inputValue, setInputValue }) => {
             placeholder="Search for companies"
             value={input}
             onChange={(e) => handleChange(e.target.value)}
+            onKeyDown={handleKeyDown}
           />
         </div>
       </div>
