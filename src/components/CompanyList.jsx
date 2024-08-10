@@ -3,9 +3,9 @@ import MUIDataTable from "mui-datatables";
 import "./CompanyList.css";
 
 export const CompanyList = ({ results }) => {
-  const [expandedRows, setExpandedRows] = useState([]); // State to track which rows are expanded
+  const [expandedRows, setExpandedRows] = useState([]); // State to track expanded rows
 
-  const handleExpandClick = (index) => {
+  const handleToggleExpand = (index) => {
     setExpandedRows(prevState =>
       prevState.includes(index)
         ? prevState.filter(row => row !== index) // Collapse if already expanded
@@ -19,20 +19,18 @@ export const CompanyList = ({ results }) => {
     const maxVisible = 5; // Number of items to show before truncation
     const isExpanded = expandedRows.includes(tableMeta.rowIndex);
 
-    if (isExpanded || techStack.length <= maxVisible) {
-      return techStack.join(', '); // Show full tech stack if expanded
+    if (isExpanded) {
+      return (
+        <span onClick={() => handleToggleExpand(tableMeta.rowIndex)} className="tech-stack">
+          {techStack.join(', ')}
+        </span>
+      );
     } else {
       const visibleStack = techStack.slice(0, maxVisible).join(', ');
       const remainingCount = techStack.length - maxVisible;
       return (
-        <span>
-          {visibleStack} 
-          <button 
-            className="expand-button" 
-            onClick={() => handleExpandClick(tableMeta.rowIndex)}
-          >
-            +{remainingCount}
-          </button>
+        <span onClick={() => handleToggleExpand(tableMeta.rowIndex)} className="tech-stack">
+          {visibleStack}{remainingCount > 0 && ` +${remainingCount}`}
         </span>
       );
     }
