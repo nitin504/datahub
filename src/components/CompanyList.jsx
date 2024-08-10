@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import MUIDataTable from "mui-datatables";
 import "./CompanyList.css";
+import {createTheme, ThemeProvider} from '@mui/material/styles'
+
 
 export const CompanyList = ({ results }) => {
   const [expandedRows, setExpandedRows] = useState([]); // State to track expanded rows
@@ -101,17 +103,55 @@ export const CompanyList = ({ results }) => {
 
   // Table options to ensure it fits within the screen
   const options = {
-    selectableRows: 'none', // Disable row selection
+    selectableRows: false, // Disable row selection
+    elevation: 0, // Remove
+    RowsPerPage: 10, // Set the number of rows per page
     responsive: 'standard', // Ensure the table is responsive
+    rowsPerPageOptions: [10, 20, 30, 40, 50], // Set the options for the number of rows per page
   };
+
+  const getMuiTheme = () => 
+    createTheme({
+      typography: {
+        fontFamily: 'Poppins, sans-serif',
+        fontSize: 15,
+      },
+      palette: {
+        background: {
+          paper: '#FFFFFF',
+        }
+      },
+      components: {
+        MuiTableCell: {
+          styleOverrides: {
+            head: {
+              padding: '10px 4px',
+              backgroundColor: '#F5F7FC',
+              
+            },
+            body: {
+              padding: '7px 15px',
+              ":hover": {
+                backgroundColor: '#F5F7FC',
+              }
+            },
+            footer: {
+              
+            },
+          },
+        },
+      },
+    });
 
   return (
     <div className="company-list-container">
+      <ThemeProvider theme={getMuiTheme()}>
       <MUIDataTable
         data={data}
         columns={columns}
         options={options}
       />
+      </ThemeProvider>
     </div>
   );
 };
