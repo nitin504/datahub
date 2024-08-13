@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import { SearchBar } from "./components/SearchBar";
 import { SearchResultsList } from "./components/SearchResultsList";
 import Header from './components/Header';
@@ -11,28 +11,29 @@ const App = () => {
   const [companyListResults, setCompanyListResults] = useState([]);
 
   const handleSearch = (searchTerm) => {
-    // Filter results based on the search term
     const filteredResults = results.filter((result) =>
       result.companyName.toLowerCase().includes(searchTerm.toLowerCase())
     );
     setCompanyListResults(filteredResults);
   };
 
+  const clearResults = () => {
+    setResults([]);
+    setInputValue('');
+  };
+
   return (
     <div className='App'>
-      <div className="Header">
-        <Header />
-      </div>
+      <Header />
       <div className='search-bar-container'>
         <SearchBar
           setResults={setResults}
           inputValue={inputValue}
           setInputValue={setInputValue}
           onSearch={handleSearch}
+          clearResults={clearResults}
         />
         <SearchResultsList results={results} inputValue={inputValue} />
-      </div>
-      <div className="CompanyList">
         <CompanyList results={companyListResults} />
       </div>
     </div>
