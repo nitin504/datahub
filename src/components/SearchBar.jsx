@@ -8,7 +8,7 @@ export const SearchBar = ({ setResults, inputValue, setInputValue, onSearch, cle
 
   const companyData = async (value) => {
     try {
-      const response = await fetch("http://192.168.1.39:3000/api/companies");
+      const response = await fetch("https://datahub-backend-vosw.onrender.com/api/companies");
       if (!response.ok) {
         throw new Error("Network response was not ok");
       }
