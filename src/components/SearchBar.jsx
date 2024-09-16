@@ -22,11 +22,16 @@ export const SearchBar = ({ setResults, inputValue, setInputValue, onSearch, cle
   };
 
   const searchJSONData = (data, input) => {
-    const regex = new RegExp(input, "i");
-    const filteredData = data.filter((item) => item.companyName && regex.test(item.companyName));
+    const filteredData = data.filter((item) => {
+      if (item.companyName) {
+        const companyWords = item.companyName.split(/\s+/);  
+        return companyWords.some((word) => word.toLowerCase().startsWith(input.toLowerCase())); 
+      }
+      return false;
+    });
     return filteredData.sort((a, b) => a.companyName.localeCompare(b.companyName));
-  };
-
+  };  
+  
   const handleChange = (value) => {
     setInput(value);
     setInputValue(value);
