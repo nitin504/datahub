@@ -112,7 +112,7 @@ export const CompanyList = ({ results }) => {
     download: false, // Disable CSV download
     print: false, // Disable print
     viewColumns: true, // Enable the ability to show/hide columns
-    filter: true, // Enable filters
+    filter: true, // Enable filter
   };
 
   const getMuiTheme = () => 
