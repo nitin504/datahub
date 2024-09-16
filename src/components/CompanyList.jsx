@@ -104,10 +104,15 @@ export const CompanyList = ({ results }) => {
   // Table options to ensure it fits within the screen
   const options = {
     selectableRows: false, // Disable row selection
-    elevation: 0, // Remove
-    RowsPerPage: 10, // Set the number of rows per page
+    elevation: 0, // Remove elevation
+    rowsPerPage: 10, // Set the number of rows per page
     responsive: 'standard', // Ensure the table is responsive
     rowsPerPageOptions: [10, 20, 30, 40, 50], // Set the options for the number of rows per page
+    search: false, // Disable search
+    download: false, // Disable CSV download
+    print: false, // Disable print
+    viewColumns: true, // Enable the ability to show/hide columns
+    filter: true, // Enable filter
   };
 
   const getMuiTheme = () => 
