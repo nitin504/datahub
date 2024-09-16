@@ -1,65 +1,65 @@
-
 .banner {
-    width: 190%;
-    height: 200px;
-    background: linear-gradient(to right,#417DFF, #052175);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    position: relative;
-    border-radius: 15px;
-  }
-  
+  width: 190%;
+  height: 200px;
+  background: linear-gradient(to right, #417DFF, #052175);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  border-radius: 15px;
+}
+
+.search-container {
+  position: absolute;
+  bottom: -25px; /* Adjust this to place the input exactly as in the image */
+  width: 52.7%;
+  /*max-width: 50%;  Adjust max-width for smaller or larger screens */
+  display: flex;
+  justify-content: center;
+}
+
+.input-wrapper {
+  display: flex;
+  align-items: center;
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.15); /* Enhanced shadow */
+  padding: 10px 15px;
+  transition: box-shadow 0.3s ease-in-out;
+  width: 100%;
+}
+
+.input-wrapper:hover {
+  box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2); /* Shadow effect on hover */
+}
+
+#search-icon {
+  color: #546B8F;
+  margin-right: 8px;
+  font-size: 18px;
+}
+
+input[type="text"] {
+  border: none;
+  outline: none;
+  flex: 1;
+  padding: 10px;
+  font-size: 16px;
+  border-radius: 25px;
+  color: #010D39;
+  transition: all 0.3s ease-in-out;
+}
+
+input[type="text"]::placeholder {
+  color: #aaa;
+}
+
+@media (max-width: 768px) {
   .search-container {
-    position: absolute;
-    bottom: -25px; /* Adjust this to place the input exactly as in the image */
-    width: 52.7%;
-    /*max-width: 50%;  Adjust max-width for smaller or larger screens */
-    display: flex;
-    justify-content: center;
+    max-width: 90%;
   }
-  
-  .input-wrapper {
-    display: flex;
-    align-items: center;
-    background-color: #fff;
-    border-radius: 10px;
-    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.1);
-    padding: 10px 15px;
-    transition: box-shadow 0.3s ease-in-out;
-    width: 100%;
-  }
-  
-  #search-icon {
-    color: #546B8F;
-    margin-right: 8px;
+
+  input[type="text"] {
     font-size: 18px;
   }
-  
-  input[type="text"] {
-    border: none;
-    outline: none;
-    flex: 1;
-    padding: 10px;
-    font-size: 16px;
-    border-radius: 25px;
-    color: #010D39;
-    transition: all 0.3s ease-in-out;
-  }
-  
-  input[type="text"]::placeholder {
-    color: #aaa;
-  }
-  
-
-  
-  @media (max-width: 768px) {
-    .search-container {
-      max-width: 90%;
-    }
-  
-    input[type="text"] {
-      font-size: 18px;
-    }
-  }
-  
+}

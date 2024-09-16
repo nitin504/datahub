@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { FaSearch } from "react-icons/fa";
 import "./SearchBar.css";
 
-export const SearchBar = ({ setResults, inputValue, setInputValue, onSearch }) => {
+export const SearchBar = ({ setResults, inputValue, setInputValue, onSearch, onResultsToggle }) => {
   const [input, setInput] = useState("");
 
   const companyData = async (value) => {
@@ -15,6 +15,7 @@ export const SearchBar = ({ setResults, inputValue, setInputValue, onSearch }) =
       const results = searchJSONData(companyData, value);
       console.log("Filtered results:", results); // Debugging log
       setResults(results);
+      onResultsToggle(true); // Show results when data is fetched
     } catch (error) {
       console.error("Failed to fetch company data:", error);
       setResults([]); 
@@ -35,7 +36,8 @@ export const SearchBar = ({ setResults, inputValue, setInputValue, onSearch }) =
     if (value) {
       companyData(value);
     } else {
-      setResults([]); 
+      setResults([]);
+      onResultsToggle(false); // Hide results if input is empty
     }
   };
 
