@@ -33,10 +33,22 @@ export const SearchBar = ({ setResults, inputValue, setInputValue, onSearch, onR
   }, 300)).current;
 
   const searchJSONData = (data, input) => {
-    const regex = new RegExp(input, "i");
-    const filteredData = data.filter((item) => item.companyName && regex.test(item.companyName));
-    return filteredData.sort((a, b) => a.companyName.localeCompare(b.companyName));
+    const filteredData = data.filter((item) => {
+      if (item.companyName) {
+        const companyWords = item.companyName.split(/\s+/);  // Split by spaces to handle multi-word names
+        return companyWords.some((word) => word.toLowerCase().startsWith(input.toLowerCase())); // Check if any word starts with the input
+      }
+      return false;
+    });
+  
+    // Trim whitespace from company names and sort them case-insensitively
+    return filteredData.sort((a, b) => 
+      a.companyName.trim().toLowerCase().localeCompare(b.companyName.trim().toLowerCase())
+    );
   };
+  
+
+  //some change kuuch kra hai
 
   const handleChange = (value) => {
     setInput(value);
