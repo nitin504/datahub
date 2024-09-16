@@ -1,3 +1,9 @@
+.search-results-container {
+    width: 100%;
+    max-width: 100%; /* Make sure it fits within the container */
+    margin: 0 auto; /* Center align the search results container */
+}
+
 .search-result {
     padding: 10px 20px;
     border-radius: 10px;
@@ -8,4 +14,3 @@
     color: #005BFB;
     cursor: pointer;
 }
-
