@@ -35,13 +35,12 @@ export const SearchBar = ({ setResults, inputValue, setInputValue, onSearch, onR
   const searchJSONData = (data, input) => {
     const filteredData = data.filter((item) => {
       if (item.companyName) {
-        const companyWords = item.companyName.split(/\s+/);  // Split by spaces to handle multi-word names
-        return companyWords.some((word) => word.toLowerCase().startsWith(input.toLowerCase())); // Check if any word starts with the input
+        const companyWords = item.companyName.split(/\s+/);  
+        return companyWords.some((word) => word.toLowerCase().startsWith(input.toLowerCase())); 
       }
       return false;
     });
   
-    // Trim whitespace from company names and sort them case-insensitively
     return filteredData.sort((a, b) => 
       a.companyName.trim().toLowerCase().localeCompare(b.companyName.trim().toLowerCase())
     );

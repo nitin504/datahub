@@ -28,8 +28,16 @@ const App = () => {
     };
 
     document.addEventListener("mousedown", handleClickOutside);
+
+    const handleContextMenu = (event) => {
+      event.preventDefault();
+    };
+
+    document.addEventListener("contextmenu", handleContextMenu);
+
     return () => {
       document.removeEventListener("mousedown", handleClickOutside);
+      document.removeEventListener("contextmenu", handleContextMenu);
     };
   }, []);
 
