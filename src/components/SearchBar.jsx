@@ -29,8 +29,13 @@ export const SearchBar = ({ setResults, inputValue, setInputValue, onSearch, cle
       }
       return false;
     });
-    return filteredData.sort((a, b) => a.companyName.localeCompare(b.companyName));
-  };  
+  
+    return filteredData.sort((a, b) => 
+      a.companyName.trim().toLowerCase().localeCompare(b.companyName.trim().toLowerCase())
+    );
+  };
+  
+    
   
   const handleChange = (value) => {
     setInput(value);
