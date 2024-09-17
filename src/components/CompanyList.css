@@ -1,16 +1,23 @@
 .company-list-container {
   width: calc(100% - 100px); /* Adjust width to account for padding */
   overflow-x: hidden; /* Prevent horizontal scrolling */
-  padding-left: 100px; /* Adjust the padding value as needed   */
+  padding-left: 100px; /* Adjust the padding value as needed */
   padding-top: 40px;
 }
 
+.tech-stack {
+  cursor: pointer; /* Change cursor to pointer for tech stack items */
+}
+
+.MuiTableCell-root {
+  cursor: default; /* Ensure default cursor for other cells */
+}
 
 .expand-button {
   background: none;
   border: none;
   color: blue;
-  cursor: pointer;
+  cursor: pointer; /* Ensure the cursor is a pointer for the expand button */
   padding-left: 5px;
   text-decoration: underline;
 }
