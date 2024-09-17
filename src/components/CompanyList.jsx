@@ -5,20 +5,19 @@ import {createTheme, ThemeProvider} from '@mui/material/styles'
 
 
 export const CompanyList = ({ results }) => {
-  const [expandedRows, setExpandedRows] = useState([]); // State to track expanded rows
+  const [expandedRows, setExpandedRows] = useState([]); 
 
   const handleToggleExpand = (index) => {
     setExpandedRows(prevState =>
       prevState.includes(index)
-        ? prevState.filter(row => row !== index) // Collapse if already expanded
-        : [...prevState, index] // Expand if not already expanded
+        ? prevState.filter(row => row !== index) 
+        : [...prevState, index] 
     );
   };
 
-  // Custom render function for the Tech Stack column
   const renderTechStack = (value, tableMeta) => {
-    const techStack = value.split(', '); // Assuming the tech stack is passed as a comma-separated string
-    const maxVisible = 5; // Number of items to show before truncation
+    const techStack = value.split(', '); 
+    const maxVisible = 5; 
     const isExpanded = expandedRows.includes(tableMeta.rowIndex);
 
     if (isExpanded) {
@@ -38,7 +37,6 @@ export const CompanyList = ({ results }) => {
     }
   };
 
-  // Define columns with their labels and custom render function for Tech Stack
   const columns = [
     {
      name: "companyName",
@@ -91,28 +89,26 @@ export const CompanyList = ({ results }) => {
     },
    ];
 
-  // Format the data for the table
   const data = results.map(result => ({
     companyName : result.companyName,
     state: result.state,
     industry: result.industry,
     annualRevenue: result.annualRevenue,
     internalITTeam: result.internalITTeam ? "Yes" : "No",
-    techStack: result.techStack.join(', ') // Assuming techStack is an array
+    techStack: result.techStack.join(', ') 
   }));
 
-  // Table options to ensure it fits within the screen
   const options = {
-    selectableRows: false, // Disable row selection
-    elevation: 0, // Remove elevation
-    rowsPerPage: 10, // Set the number of rows per page
-    responsive: 'standard', // Ensure the table is responsive
-    rowsPerPageOptions: [10, 20, 30, 40, 50], // Set the options for the number of rows per page
-    search: false, // Disable search
-    download: false, // Disable CSV download
-    print: false, // Disable print
-    viewColumns: true, // Enable the ability to show/hide columns
-    filter: true, // Enable filter
+    selectableRows: false, 
+    elevation: 0, 
+    rowsPerPage: 10, 
+    responsive: 'standard', 
+    rowsPerPageOptions: [10, 20, 30, 40, 50], 
+    search: false, 
+    download: false, 
+    print: false, 
+    viewColumns: true, 
+    filter: true, 
   };
 
   const getMuiTheme = () => 

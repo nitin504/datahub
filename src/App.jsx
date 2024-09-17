@@ -48,11 +48,14 @@ const App = () => {
           onSearch={handleSearch}
           onResultsToggle={handleResultsDisplay}
         />
-        <div ref={resultsRef} style={{ display: showResults ? 'block' : 'none' }}>
+        <div
+          ref={resultsRef}
+          className={`search-results-container ${showResults ? 'show' : 'hide'}`}
+        >
           <SearchResultsList results={results} inputValue={inputValue} />
         </div>
       </div>
-      <div className="CompanyList">
+      <div className="company-list-container">
         <CompanyList results={companyListResults} />
       </div>
     </div>

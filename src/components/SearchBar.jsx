@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import { FaSearch } from "react-icons/fa";
 import "./SearchBar.css";
-import API_BASE_URL from "../apiConfig";
 
 // Utility function to debounce a function
 const debounce = (func, delay) => {
@@ -18,7 +17,7 @@ export const SearchBar = ({ setResults, inputValue, setInputValue, onSearch, onR
   // Debounced version of companyData
   const debouncedCompanyData = useRef(debounce(async (value) => {
     try {
-      const response = await fetch(`${API_BASE_URL}/companies`); // Use the API base URL
+      const response = await fetch("https://datahub-backend-vosw.onrender.com/api/companies");
       if (!response.ok) {
         throw new Error("Network response was not ok");
       }
@@ -47,6 +46,9 @@ export const SearchBar = ({ setResults, inputValue, setInputValue, onSearch, onR
     );
   };
   
+
+  //some change kuuch kra hai
+
   const handleChange = (value) => {
     setInput(value);
     setInputValue(value);
