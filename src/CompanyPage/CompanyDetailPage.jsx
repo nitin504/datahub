@@ -1,11 +1,10 @@
-
-
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import Header from '../components/Header';
 import './CompanyDetailPage.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEnvelope, faPhone } from '@fortawesome/free-solid-svg-icons';
+import API_BASE_URL from '../apiConfig';
 
 export const CompanyDetailPage = () => {
   const { companyName } = useParams();
@@ -15,7 +14,7 @@ export const CompanyDetailPage = () => {
   useEffect(() => {
     const fetchCompanyDetails = async () => {
       try {
-        const response = await fetch(`https://datahub-backend-vosw.onrender.com/api/companies/${encodeURIComponent(companyName)}`);
+        const response = await fetch(`${API_BASE_URL}/companies/${encodeURIComponent(companyName)}`); // Use the API base URL
         if (!response.ok) {
           throw new Error('Failed to fetch company details');
         }

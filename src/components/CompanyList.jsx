@@ -93,7 +93,7 @@ export const CompanyList = ({ results }) => {
 
   // Format the data for the table
   const data = results.map(result => ({
-    companyName: result.companyName,
+    companyName : result.companyName,
     state: result.state,
     industry: result.industry,
     annualRevenue: result.annualRevenue,
