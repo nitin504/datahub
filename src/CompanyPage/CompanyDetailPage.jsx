@@ -68,7 +68,7 @@ export const CompanyDetailPage = () => {
         </div>
 
         {/* Tech Stack */}
-        <div className="tech-stack">
+        <div className="tech-stacks">
           <h2>Tech Stack</h2>
           <div className="stack-list">
             {Array.isArray(companyDetails.techStack) ? (

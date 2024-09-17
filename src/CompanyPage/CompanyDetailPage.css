@@ -1,17 +1,15 @@
-
-
-
 .company-detail-container {
     display: grid;
-    grid-template-columns: 1fr 2fr 1fr; /* 1fr for sidebar, 2fr for main content, 1fr for contacts */
-    gap: 20px;
+    grid-template-columns: repeat(3, 1fr); /* 3 equal columns */
+    gap: 20px; /* Gap between columns and rows */
     padding: 20px;
+    background-color: #EAEEF9; /* Background color for the gap */
   }
   
   /* Company Overview spans across all columns */
   .company-overview {
-    grid-column: 1 / -1;
-    background: #f8f9fa;
+    grid-column: 1 / -1; /* Spans all columns */
+    background: #fff; /* Background color for content */
     padding: 20px;
     border-radius: 8px;
     display: flex;
@@ -43,6 +41,7 @@
   
   /* Blocks styling */
   .company-details,
+  .tech-stacks,
   .attributes,
   .industry,
   .contacts,
@@ -85,35 +84,31 @@
   }
   
   /* Contact cards layout */
- .contacts {
-  grid-column: 3 / 4; /* Ensure it occupies the right side of the layout */
-}
-
-.contact-card {
-  border: 1px solid #ddd;
-  padding: 15px;
-  margin-bottom: 10px;
-  border-radius: 8px;
-  background-color: #fff; /* Make sure the background is white */
-}
-
-.contact-card h3 {
-  margin-bottom: 10px;
-  font-size: 1.2rem;
-}
-
-.contact-card p {
-  margin: 5px 0;
-}
-
-.contact-card a {
-  color: #007bff;
-  text-decoration: none;
-}
-
-.contact-card a:hover {
-  text-decoration: underline;
-}
+  .contact-card {
+    border: 1px solid #ddd;
+    padding: 15px;
+    margin-bottom: 10px;
+    border-radius: 8px;
+    background-color: #fff; /* Make sure the background is white */
+  }
+  
+  .contact-card h3 {
+    margin-bottom: 10px;
+    font-size: 1.2rem;
+  }
+  
+  .contact-card p {
+    margin: 5px 0;
+  }
+  
+  .contact-card a {
+    color: #007bff;
+    text-decoration: none;
+  }
+  
+  .contact-card a:hover {
+    text-decoration: underline;
+  }
   
   /* Similar Companies block styling */
   .similar-companies ul {
