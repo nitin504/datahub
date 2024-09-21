@@ -10,6 +10,7 @@ const App = () => {
   const [inputValue, setInputValue] = useState('');
   const [companyListResults, setCompanyListResults] = useState([]);
   const [showResults, setShowResults] = useState(false);
+  const searchBarRef = useRef(null);
   const resultsRef = useRef(null);
 
   const handleSearch = (searchTerm) => {
@@ -21,14 +22,18 @@ const App = () => {
 
   useEffect(() => {
     const handleClickOutside = (event) => {
-      if (resultsRef.current && !resultsRef.current.contains(event.target)) {
+      if (
+        resultsRef.current && 
+        !resultsRef.current.contains(event.target) &&
+        !searchBarRef.current.contains(event.target)
+      ) {
         setShowResults(false);
       }
     };
 
     const handleEnterKey = (event) => {
       if (event.key === "Enter") {
-        setShowResults(false);
+        setShowResults(false); // Hide results on Enter key press
       }
     };
 
@@ -41,11 +46,11 @@ const App = () => {
     };
   }, []);
 
+  // Handles focus event to restore search results if input has a value
   const handleSearchBarFocus = () => {
-    // If there is already an input value, trigger the search and show results
     if (inputValue) {
-      handleSearch(inputValue); // Trigger the search with the current input value
-      setShowResults(true); // Make sure the results are shown again on focus
+      handleSearch(inputValue); // Trigger search with the current input value
+      setShowResults(true); // Show results again when the search bar is focused
     }
   };
 
@@ -56,21 +61,23 @@ const App = () => {
   return (
     <div className='App'>
       <Header />
-      <div className='search-bar-container'>
+      <div className='search-bar-container' ref={searchBarRef}>
         <SearchBar
           setResults={setResults}
           inputValue={inputValue}
           setInputValue={setInputValue}
           onSearch={handleSearch}
           onResultsToggle={handleResultsDisplay}
-          onFocus={handleSearchBarFocus} // Handle focus to restore results
+          onFocus={handleSearchBarFocus} // Focus event to restore search results
         />
-        <div
-          ref={resultsRef}
-          className={`search-results-container ${showResults ? 'show' : 'hide'}`}
-        >
-          <SearchResultsList results={results} inputValue={inputValue} />
-        </div>
+        {showResults && (
+          <div
+            ref={resultsRef}
+            className={`search-results-container`}
+          >
+            <SearchResultsList results={results} inputValue={inputValue} />
+          </div>
+        )}
       </div>
       <div className="company-list-container">
         <CompanyList results={companyListResults} />
