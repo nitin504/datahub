@@ -6,7 +6,7 @@
 }
 
 .tech-stack {
-  cursor: pointer; 
+  cursor: pointer;
 }
 
 .MuiTableCell-root {
@@ -24,4 +24,13 @@
 
 .expand-button:hover {
   color: darkblue;
+}
+
+.CompanyName {
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+.CompanyName:hover {
+  cursor: pointer;
 }
