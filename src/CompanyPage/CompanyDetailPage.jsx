@@ -1,9 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react'; 
 import { useParams } from 'react-router-dom';
 import Header from '../components/Header';
 import './CompanyDetailPage.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faEnvelope, faPhone } from '@fortawesome/free-solid-svg-icons';
+import { faEnvelope, faPhone, faGlobe } from '@fortawesome/free-solid-svg-icons';
+import { faLinkedin } from '@fortawesome/free-brands-svg-icons';
 import API_BASE_URL from '../apiConfig';
 
 export const CompanyDetailPage = () => {
@@ -14,7 +15,7 @@ export const CompanyDetailPage = () => {
   useEffect(() => {
     const fetchCompanyDetails = async () => {
       try {
-        const response = await fetch(`${API_BASE_URL}/companies/${encodeURIComponent(companyName)}`); // Use the API base URL
+        const response = await fetch(`${API_BASE_URL}/${encodeURIComponent(companyName)}`);
         if (!response.ok) {
           throw new Error('Failed to fetch company details');
         }
@@ -45,9 +46,15 @@ export const CompanyDetailPage = () => {
           <div className="company-header">
             <img src={companyDetails.logoUrl} alt={companyDetails.companyName} className="company-logo" />
             <h1>{companyDetails.companyName}</h1>
-            <a href={companyDetails.website} target="_blank" rel="noopener noreferrer">{companyDetails.website}</a>
+            <a href={companyDetails.website} target="_blank" rel="noopener noreferrer">
+              <FontAwesomeIcon icon={faGlobe} /> {companyDetails.website}
+            </a>
             <div className="social-icons">
-              {/* You can add LinkedIn, Twitter, etc., icons here */}
+              {companyDetails.linkedin && (
+                <a href={companyDetails.linkedin} target="_blank" rel="noopener noreferrer">
+                  <FontAwesomeIcon icon={faLinkedin} />
+                </a>
+              )}
             </div>
           </div>
           <div className="company-info">
@@ -63,14 +70,14 @@ export const CompanyDetailPage = () => {
           <p><strong>Phone:</strong> {companyDetails.phone}</p>
           <p><strong>Domain Rank:</strong> {companyDetails.domainRank}</p>
           <p><strong>Year Founded:</strong> {companyDetails.yearFounded}</p>
-          <p><strong>Ticker:</strong> {companyDetails.ticker}</p>
+          <p><strong>Employee Count:</strong> {companyDetails.employeeCount}</p>
         </div>
 
         {/* Tech Stack */}
         <div className="tech-stacks">
           <h2>Tech Stack</h2>
           <div className="stack-list">
-            {Array.isArray(companyDetails.techStack) ? (
+            {Array.isArray(companyDetails.techStack) && companyDetails.techStack.length > 0 ? (
               companyDetails.techStack.map((tech, index) => (
                 <span key={index} className="tech-item">{tech}</span>
               ))
@@ -94,14 +101,12 @@ export const CompanyDetailPage = () => {
                 <p>{contact.Designation}</p>
                 <p>
                   <a href={`mailto:${contact["Email ID"]}`}>
-                    <FontAwesomeIcon icon={faEnvelope} style={{ marginRight: '10px' }} />
-                    {contact["Email ID"]}
+                    <FontAwesomeIcon icon={faEnvelope} /> {contact["Email ID"]}
                   </a>
                 </p>
                 <p>
                   <a href={`tel:${contact["Company Ph. No."]}`}>
-                    <FontAwesomeIcon icon={faPhone} style={{ marginRight: '10px' }} />
-                    {contact["Company Ph. No."]}
+                    <FontAwesomeIcon icon={faPhone} /> {contact["Company Ph. No."]}
                   </a>
                 </p>
               </div>
@@ -114,22 +119,14 @@ export const CompanyDetailPage = () => {
         {/* Industry */}
         <div className="industry">
           <h2>Industry</h2>
-          <div className="industry-list">
-            {Array.isArray(companyDetails.industry) ? (
-              companyDetails.industry.map((industry, index) => (
-                <span key={index} className="industry-item">{industry}</span>
-              ))
-            ) : (
-              <p>No Industry information available</p>
-            )}
-          </div>
+          <p>{companyDetails.industry || 'No Industry information available'}</p>
         </div>
 
         {/* Similar Companies */}
         <div className="similar-companies">
           <h2>Similar Companies</h2>
           <ul>
-            {Array.isArray(companyDetails.similarCompanies) ? (
+            {Array.isArray(companyDetails.similarCompanies) && companyDetails.similarCompanies.length > 0 ? (
               companyDetails.similarCompanies.map((company, index) => (
                 <li key={index}>{company}</li>
               ))

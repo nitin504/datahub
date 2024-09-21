@@ -25,7 +25,7 @@
   background-color: white; /* Background to make it stand out */
   max-height: 300px; /* Adjust height as needed */
   overflow-y: auto; /* Scroll if too many results */
-  display: none; /* Hidden by default */
+  
 }
 
 .search-results-container.show {

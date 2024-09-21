@@ -1,19 +1,26 @@
 .company-detail-container {
     display: grid;
-    grid-template-columns: repeat(3, 1fr); /* 3 equal columns */
+    grid-template-columns: 1fr 1fr 1fr; /* 3 equal columns */
     gap: 20px; /* Gap between columns and rows */
     padding: 20px;
     background-color: #EAEEF9; /* Background color for the gap */
+    grid-template-rows: auto; /* Let rows height be adjusted by their content */
+    grid-template-areas:
+      "company-overview company-overview company-overview"
+      "company-details tech-stacks contacts"
+      "industry tech-stacks contacts"
+      "similar-companies tech-stacks contacts";
   }
   
   /* Company Overview spans across all columns */
   .company-overview {
-    grid-column: 1 / -1; /* Spans all columns */
+    grid-area: company-overview; /* Spans all columns */
     background: #fff; /* Background color for content */
     padding: 20px;
     border-radius: 8px;
     display: flex;
-    justify-content: space-between;
+    flex-direction: column;
+    gap: 20px;
   }
   
   /* Company logo and basic information */
@@ -42,7 +49,6 @@
   /* Blocks styling */
   .company-details,
   .tech-stacks,
-  .attributes,
   .industry,
   .contacts,
   .similar-companies {
@@ -50,22 +56,49 @@
     padding: 20px;
     border-radius: 8px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
   }
   
-  /* Headings */
-  h2 {
-    font-size: 1.5rem;
-    margin-bottom: 10px;
+  /* Specific styles for Company Details */
+  .company-details {
+    grid-area: company-details;
+    max-height: 300px; /* Adjust this value as needed */
+    overflow-y: auto; /* Adds a scrollbar if content exceeds max height */
   }
   
-  /* Tech Stack block is placed in the middle (2nd column) */
-  .tech-stack {
-    grid-column: 2 / 3; /* Occupies the middle column */
+  /* Industry block with max height and scrollable content */
+  .industry {
+    grid-area: industry;
+    max-height: 300px; /* Adjust this value as needed */
+    overflow-y: auto; /* Adds a scrollbar if content exceeds max height */
   }
   
-  /* Contacts block is placed at the right end (3rd column) */
+  /* Similar Companies block with max height and scrollable content */
+  .similar-companies {
+    grid-area: similar-companies;
+    max-height: 300px; /* Adjust this value as needed */
+    overflow-y: auto; /* Adds a scrollbar if content exceeds max height */
+  }
+  
+  /* Tech Stack block is placed in the middle column */
+  .tech-stacks {
+    grid-area: tech-stacks;
+  }
+  
+  /* Contacts block is placed at the right end column */
   .contacts {
-    grid-column: 3 / 4; /* Occupies the right column */
+    grid-area: contacts;
+  }
+  
+  /* Reducing gap between blocks in the first column */
+  .company-details {
+    margin-bottom: 10px; /* Reduce bottom margin to bring blocks closer */
+  }
+  
+  .industry {
+    margin-bottom: 10px; /* Reduce bottom margin to bring blocks closer */
   }
   
   /* Lists inside Tech Stack and Industry */
