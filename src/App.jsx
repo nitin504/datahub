@@ -13,7 +13,6 @@ const App = () => {
   const resultsRef = useRef(null);
 
   const handleSearch = (searchTerm) => {
-    // Filter results based on the search term
     const filteredResults = results.filter((result) =>
       result.companyName.toLowerCase().includes(searchTerm.toLowerCase())
     );
@@ -27,11 +26,28 @@ const App = () => {
       }
     };
 
+    const handleEnterKey = (event) => {
+      if (event.key === "Enter") {
+        setShowResults(false);
+      }
+    };
+
     document.addEventListener("mousedown", handleClickOutside);
+    document.addEventListener("keydown", handleEnterKey);
+
     return () => {
       document.removeEventListener("mousedown", handleClickOutside);
+      document.removeEventListener("keydown", handleEnterKey);
     };
   }, []);
+
+  const handleSearchBarFocus = () => {
+    // If there is already an input value, trigger the search and show results
+    if (inputValue) {
+      handleSearch(inputValue); // Trigger the search with the current input value
+      setShowResults(true); // Make sure the results are shown again on focus
+    }
+  };
 
   const handleResultsDisplay = (show) => {
     setShowResults(show);
@@ -47,6 +63,7 @@ const App = () => {
           setInputValue={setInputValue}
           onSearch={handleSearch}
           onResultsToggle={handleResultsDisplay}
+          onFocus={handleSearchBarFocus} // Handle focus to restore results
         />
         <div
           ref={resultsRef}
