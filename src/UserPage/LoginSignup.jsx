@@ -25,6 +25,12 @@ const LoginSignup = ({ onLogin, onClose }) => {
     onLogin('Google User'); // Simulating login after Google auth
   };
 
+  const handleForgotPassword = () => {
+    // Implement actual forgot password logic here
+    console.log('Forgot password clicked!');
+    // Optionally, you can redirect to a password reset page or show a modal
+  };
+
   return (
     <div className="login-signup-overlay">
       <div className="login-signup-modal">
@@ -36,6 +42,51 @@ const LoginSignup = ({ onLogin, onClose }) => {
           </button>
         </div>
         <form onSubmit={handleSubmit} className="login-signup-form">
+          {isLogin ? (
+            <>
+              <input
+                type="text"
+                placeholder="Email or Username"
+                value={username}
+                onChange={(e) => setUsername(e.target.value)}
+                required
+              />
+              <input
+                type="password"
+                placeholder="Password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                required
+              />
+              <button type="button" className="forgot-password-link" onClick={handleForgotPassword}>
+                Forgot your password?
+              </button>
+            </>
+          ) : (
+            <>
+              <input
+                type="text"
+                placeholder="Username"
+                value={username}
+                onChange={(e) => setUsername(e.target.value)}
+                required
+              />
+              <input
+                type="email"
+                placeholder="Email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                required
+              />
+              <input
+                type="password"
+                placeholder="Password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                required
+              />
+            </>
+          )}
           <input
             type="text"
             placeholder="Username"

@@ -66,6 +66,15 @@
   cursor: pointer;
 }
 
+.forgot-password-link {
+  background: none;
+  border: none;
+  color: #007bff;
+  font-size: 1rem;
+  cursor: pointer;
+  text-align: left;
+}
+
 .separator {
   display: flex;
   align-items: center;
