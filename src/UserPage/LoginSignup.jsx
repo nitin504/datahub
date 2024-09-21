@@ -25,6 +25,12 @@ const LoginSignup = ({ onLogin, onClose }) => {
     onLogin('Google User'); // Simulating login after Google auth
   };
 
+  const handleForgotPassword = () => {
+    // Implement actual forgot password logic here
+    console.log('Forgot password clicked!');
+    // Optionally, you can redirect to a password reset page or show a modal
+  };
+
   return (
     <div className="login-signup-overlay">
       <div className="login-signup-modal">
@@ -52,6 +58,9 @@ const LoginSignup = ({ onLogin, onClose }) => {
                 onChange={(e) => setPassword(e.target.value)}
                 required
               />
+              <button type="button" className="forgot-password-link" onClick={handleForgotPassword}>
+                Forgot your password?
+              </button>
             </>
           ) : (
             <>
