@@ -27,6 +27,11 @@
   margin-bottom: 1.5rem;
 }
 
+.auth0-logo {
+  height: 30px;
+  margin-right: 10px;
+}
+
 .login-signup-header h2 {
   margin: 0;
 }
@@ -59,6 +64,41 @@
   border-radius: 4px;
   font-size: 1rem;
   cursor: pointer;
+}
+
+.separator {
+  display: flex;
+  align-items: center;
+  margin: 1rem 0;
+}
+
+.line {
+  flex-grow: 1;
+  height: 1px;
+  background-color: #ccc;
+}
+
+.separator p {
+  margin: 0 10px;
+  color: #888;
+}
+
+.google-login-button {
+  width: 100%;
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  padding: 0.75rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+.google-logo {
+  height: 20px;
 }
 
 .login-signup-footer {

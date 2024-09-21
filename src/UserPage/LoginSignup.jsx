@@ -5,8 +5,8 @@ import './LoginSignup.css';
 const LoginSignup = ({ onLogin, onClose }) => {
   const [isLogin, setIsLogin] = useState(true);
   const [username, setUsername] = useState('');
-  const [emailId, setEmailId] = useState('');
   const [password, setPassword] = useState('');
+  const [email, setEmail] = useState('');
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -19,11 +19,18 @@ const LoginSignup = ({ onLogin, onClose }) => {
     }
   };
 
+  const handleGoogleLogin = () => {
+    // Implement actual Google login logic here
+    console.log('Google login clicked!');
+    onLogin('Google User'); // Simulating login after Google auth
+  };
+
   return (
     <div className="login-signup-overlay">
       <div className="login-signup-modal">
         <div className="login-signup-header">
-          <h2>{isLogin ? 'Login' : 'Sign Up'}</h2>
+          <img src="https://auth0.com/wp-content/uploads/2018/07/b3e6efdc5ec11c29d2b3c95f31744aa6.svg" alt="Auth0 Logo" className="auth0-logo" />
+          <h2>{isLogin ? 'Log In' : 'Sign Up'}</h2>
           <button className="close-button" onClick={onClose}>
             &times;
           </button>
@@ -37,13 +44,6 @@ const LoginSignup = ({ onLogin, onClose }) => {
             required
           />
           <input
-            type="email"
-            placeholder="Email"
-            value={emailId}
-            onChange={(e) => setEmailId(e.target.value)}
-            required
-          />
-          <input
             type="password"
             placeholder="Password"
             value={password}
@@ -51,9 +51,18 @@ const LoginSignup = ({ onLogin, onClose }) => {
             required
           />
           <button type="submit" className="login-signup-button">
-            {isLogin ? 'Login' : 'Sign Up'}
+            {isLogin ? 'Log In' : 'Sign Up'}
           </button>
         </form>
+        <div className="separator">
+          <div className="line"></div>
+          <p>or</p>
+          <div className="line"></div>
+        </div>
+        <button onClick={handleGoogleLogin} className="google-login-button">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg" alt="Google logo" className="google-logo" />
+          Continue with Google
+        </button>
         <div className="login-signup-footer">
           <p>
             {isLogin ? "Don't have an account? " : "Already have an account? "}
@@ -61,7 +70,7 @@ const LoginSignup = ({ onLogin, onClose }) => {
               className="login-signup-toggle-button"
               onClick={() => setIsLogin(!isLogin)}
             >
-              {isLogin ? 'Sign Up' : 'Login'}
+              {isLogin ? 'Sign Up' : 'Log In'}
             </button>
           </p>
         </div>
