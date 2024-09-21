@@ -5,6 +5,7 @@ import './LoginSignup.css';
 const LoginSignup = ({ onLogin, onClose }) => {
   const [isLogin, setIsLogin] = useState(true);
   const [username, setUsername] = useState('');
+  const [emailId, setEmailId] = useState('');
   const [password, setPassword] = useState('');
 
   const handleSubmit = (e) => {
@@ -33,6 +34,13 @@ const LoginSignup = ({ onLogin, onClose }) => {
             placeholder="Username"
             value={username}
             onChange={(e) => setUsername(e.target.value)}
+            required
+          />
+          <input
+            type="email"
+            placeholder="Email"
+            value={emailId}
+            onChange={(e) => setEmailId(e.target.value)}
             required
           />
           <input
