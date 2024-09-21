@@ -1,13 +1,17 @@
+// src/components/Header.jsx
 import React from 'react';
-import './Header.css'; // Import the CSS file for styling
+import { Link } from 'react-router-dom';
+import './Header.css';
 
-const Header = () => {
+const Header = ({ isLoggedIn, userInitials, onAvatarClick }) => {
   return (
     <header className="header">
-        <span>Datahub.ai</span>      
+      <span>Datahub.ai</span>
       <div className="header__user">
         <button className="header__help">Help</button>
-        <div className="header__avatar">LW</div>
+        <div className="header__avatar" onClick={onAvatarClick}>
+          {isLoggedIn ? userInitials : '?'}
+        </div>
       </div>
     </header>
   );

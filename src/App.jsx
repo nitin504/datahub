@@ -1,7 +1,9 @@
+// src/App.jsx
 import React, { useState, useRef, useEffect } from "react";
 import { SearchBar } from "./components/SearchBar";
 import { SearchResultsList } from "./components/SearchResultsList";
 import Header from './components/Header';
+import LoginSignup from './UserPage/LoginSignup';
 import "./App.css";
 import { CompanyList } from "./components/CompanyList";
 
@@ -10,6 +12,9 @@ const App = () => {
   const [inputValue, setInputValue] = useState('');
   const [companyListResults, setCompanyListResults] = useState([]);
   const [showResults, setShowResults] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [username, setUsername] = useState('');
+  const [showLoginSignup, setShowLoginSignup] = useState(false);
   const searchBarRef = useRef(null);
   const resultsRef = useRef(null);
 
@@ -33,7 +38,7 @@ const App = () => {
 
     const handleEnterKey = (event) => {
       if (event.key === "Enter") {
-        setShowResults(false); // Hide results on Enter key press
+        setShowResults(false);
       }
     };
 
@@ -46,11 +51,10 @@ const App = () => {
     };
   }, []);
 
-  // Handles focus event to restore search results if input has a value
   const handleSearchBarFocus = () => {
     if (inputValue) {
-      handleSearch(inputValue); // Trigger search with the current input value
-      setShowResults(true); // Show results again when the search bar is focused
+      handleSearch(inputValue);
+      setShowResults(true);
     }
   };
 
@@ -58,9 +62,25 @@ const App = () => {
     setShowResults(show);
   };
 
+  const handleAvatarClick = () => {
+    if (!isLoggedIn) {
+      setShowLoginSignup(true);
+    }
+  };
+
+  const handleLogin = (username) => {
+    setIsLoggedIn(true);
+    setUsername(username);
+    setShowLoginSignup(false);
+  };
+
   return (
     <div className='App'>
-      <Header />
+      <Header 
+        isLoggedIn={isLoggedIn}
+        userInitials={username ? username.charAt(0).toUpperCase() : ''}
+        onAvatarClick={handleAvatarClick}
+      />
       <div className='search-bar-container' ref={searchBarRef}>
         <SearchBar
           setResults={setResults}
@@ -68,7 +88,7 @@ const App = () => {
           setInputValue={setInputValue}
           onSearch={handleSearch}
           onResultsToggle={handleResultsDisplay}
-          onFocus={handleSearchBarFocus} // Focus event to restore search results
+          onFocus={handleSearchBarFocus}
         />
         {showResults && (
           <div
@@ -82,6 +102,12 @@ const App = () => {
       <div className="company-list-container">
         <CompanyList results={companyListResults} />
       </div>
+      {showLoginSignup && (
+        <LoginSignup 
+          onLogin={handleLogin}
+          onClose={() => setShowLoginSignup(false)}
+        />
+      )}
     </div>
   );
 };
