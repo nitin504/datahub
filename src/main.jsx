@@ -4,13 +4,14 @@ import ReactDOM from 'react-dom/client';
 import App from './App.jsx';
 import './index.css';
 import CompanyDetailPage from './CompanyPage/CompanyDetailPage.jsx';
-import CompanyAdvance from './CompanyPage/CompanyAdvance.jsx'; // Import the CompanyAdvance component
+import CompanyAdvance from './CompanyPage/CompanyAdvance.jsx';
+import Help from './components/Help.jsx'; // Import the Help component
+import Feedback from './components/Feedback.jsx'; // Import the Feedback component
 import {
   createBrowserRouter,
   RouterProvider,
 } from "react-router-dom";
 
-// Custom error component for handling 404 or other errors
 const ErrorPage = () => {
   return (
     <div>
@@ -26,13 +27,21 @@ const router = createBrowserRouter([
     element: <App />,
   },
   {
-    path: "/company/:companyName", // Dynamic route for company detail
+    path: "/company/:companyName",
     element: <CompanyDetailPage />,
   },
   {
-    path: "/company/:companyName/advance", // Route for the advanced view
+    path: "/company/:companyName/advance",
     element: <CompanyAdvance />,
-    errorElement: <ErrorPage />, // Custom error page
+    errorElement: <ErrorPage />,
+  },
+  {
+    path: "/help",
+    element: <Help />, // Route for Help page
+  },
+  {
+    path: "/feedback",
+    element: <Feedback />, // Route for Feedback page
   },
 ]);
 

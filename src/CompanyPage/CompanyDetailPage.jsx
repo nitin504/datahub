@@ -48,8 +48,13 @@ export const CompanyDetailPage = () => {
   };
 
   if (error) {
-    return <div>Error: {error}</div>;
-  }
+    return (
+        <div>
+            <p>Error: {error}</p>
+            <button onClick={fetchCompanyDetails}>Retry</button>
+        </div>
+    );
+}
 
   if (!companyDetails) {
     return (

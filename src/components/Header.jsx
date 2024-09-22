@@ -8,7 +8,8 @@ const Header = ({ isLoggedIn, userInitials, onAvatarClick }) => {
     <header className="header">
       <span>Datahub.ai</span>
       <div className="header__user">
-        <button className="header__help">Help</button>
+        <Link to="/help" className="header__help">Help</Link>
+        <Link to="/feedback" className="header__feedback">Feedback</Link>
         <div className="header__avatar" onClick={onAvatarClick}>
           {isLoggedIn ? userInitials : '?'}
         </div>
