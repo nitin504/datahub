@@ -1,155 +1,524 @@
 .company-detail-container {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr; /* 3 equal columns */
-    gap: 20px; /* Gap between columns and rows */
-    padding: 20px;
-    background-color: #EAEEF9; /* Background color for the gap */
-    grid-template-rows: auto; /* Let rows height be adjusted by their content */
-    grid-template-areas:
-      "company-overview company-overview company-overview"
-      "company-details tech-stacks contacts"
-      "industry tech-stacks contacts"
-      "similar-companies tech-stacks contacts";
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr; /* 3 equal columns */
+  gap: 20px; /* Gap between columns and rows */
+  padding: 20px;
+  background-color: #EAEEF9; /* Background color for the gap */
+  grid-template-rows: auto; /* Let rows height be adjusted by their content */
+  grid-template-areas:
+    "company-overview company-overview company-overview"
+    "company-details tech-stacks contacts"
+    "industry tech-stacks contacts"
+    "similar-companies tech-stacks contacts";
+}
+
+/* Company Overview spans across all columns */
+.company-overview {
+  grid-area: company-overview; /* Spans all columns */
+  background: #fff; /* Background color for content */
+  padding: 20px;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* Company logo and basic information */
+.company-header {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.company-logo {
+  width: 100px;
+  height: 100px;
+  border-radius: 8px;
+}
+
+.company-info {
+  margin-top: 15px;
+}
+
+.social-icons {
+  display: flex;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+/* Blocks styling */
+.company-details,
+.tech-stacks,
+.industry,
+.contacts,
+.similar-companies {
+  background: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+/* Specific styles for Company Details */
+.company-details {
+  grid-area: company-details;
+  max-height: 300px; /* Adjust this value as needed */
+  overflow-y: auto; /* Adds a scrollbar if content exceeds max height */
+}
+
+/* Industry block with max height and scrollable content */
+.industry {
+  grid-area: industry;
+  max-height: 300px; /* Adjust this value as needed */
+  overflow-y: auto; /* Adds a scrollbar if content exceeds max height */
+}
+
+/* Similar Companies block with max height and scrollable content */
+.similar-companies {
+  grid-area: similar-companies;
+  max-height: 300px; /* Adjust this value as needed */
+  overflow-y: auto; /* Adds a scrollbar if content exceeds max height */
+}
+
+/* Tech Stack block is placed in the middle column */
+.tech-stacks {
+  grid-area: tech-stacks;
+}
+
+/* Contacts block is placed at the right end column */
+.contacts {
+  grid-area: contacts;
+}
+
+/* Reducing gap between blocks in the first column */
+.company-details {
+  margin-bottom: 10px; /* Reduce bottom margin to bring blocks closer */
+}
+
+.industry {
+  margin-bottom: 10px; /* Reduce bottom margin to bring blocks closer */
+}
+
+/* Lists inside Tech Stack and Industry */
+.stack-list,
+.industry-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.tech-item,
+.industry-item {
+  background: #e9ecef;
+  padding: 5px 10px;
+  border-radius: 5px;
+}
+
+/* Contact cards layout */
+.contact-card {
+  border: 1px solid #ddd;
+  padding: 15px;
+  margin-bottom: 10px;
+  border-radius: 8px;
+  background-color: #fff; /* Make sure the background is white */
+}
+
+.contact-card h3 {
+  margin-bottom: 10px;
+  font-size: 1.2rem;
+}
+
+.contact-card p {
+  margin: 5px 0;
+}
+
+.contact-card a {
+  color: #005BFB;
+  text-decoration: none;
+}
+
+.contact-card a:hover {
+  text-decoration: underline;
+}
+
+/* Similar Companies block styling */
+.similar-companies ul {
+  list-style: none;
+  padding-left: 0;
+}
+
+.similar-companies li {
+  padding: 5px 0;
+}
+
+.copy-feedback {
+  color: green; /* Or whatever color you prefer */
+  margin-top: 5px;
+  font-size: 0.9rem;
+  transition: opacity 0.5s ease;
+}
+
+.tooltip {
+  position: absolute;
+  background-color: white;
+  color: green;
+  padding: 5px 10px;
+  border-radius: 4px;
+  transition: opacity 0.3s;
+  z-index: 100;
+}
+
+.contact-info {
+  color: #005BFB; /* Blue color for email and phone */
+}
+
+.contact-info:hover {
+  text-decoration: underline; /* Underline on hover for better UX */
+}
+
+/* Loader Styles */
+.loader {
+  position: relative;
+  width: 75px;
+  height: 100px;
+}
+
+.loader__bar {
+  position: absolute;
+  bottom: 0;
+  width: 10px;
+  height: 50%;
+  background: rgb(0, 0, 0);
+  transform-origin: center bottom;
+  box-shadow: 1px 1px 0 rgba(0, 0, 0, 0.2);
+}
+
+.loader__bar:nth-child(1) {
+  left: 0px;
+  transform: scale(1, 0.2);
+  -webkit-animation: barUp1 4s infinite;
+  animation: barUp1 4s infinite;
+}
+
+.loader__bar:nth-child(2) {
+  left: 15px;
+  transform: scale(1, 0.4);
+  -webkit-animation: barUp2 4s infinite;
+  animation: barUp2 4s infinite;
+}
+
+.loader__bar:nth-child(3) {
+  left: 30px;
+  transform: scale(1, 0.6);
+  -webkit-animation: barUp3 4s infinite;
+  animation: barUp3 4s infinite;
+}
+
+.loader__bar:nth-child(4) {
+  left: 45px;
+  transform: scale(1, 0.8);
+  -webkit-animation: barUp4 4s infinite;
+  animation: barUp4 4s infinite;
+}
+
+.loader__bar:nth-child(5) {
+  left: 60px;
+  transform: scale(1, 1);
+  -webkit-animation: barUp5 4s infinite;
+  animation: barUp5 4s infinite;
+}
+
+.loader__ball {
+  position: absolute;
+  bottom: 10px;
+  left: 0;
+  width: 10px;
+  height: 10px;
+  background: rgb(44, 143, 255);
+  border-radius: 50%;
+  -webkit-animation: ball624 4s infinite;
+  animation: ball624 4s infinite;
+}
+
+@keyframes ball624 {
+  0% {
+    transform: translate(0, 0);
   }
   
-  /* Company Overview spans across all columns */
-  .company-overview {
-    grid-area: company-overview; /* Spans all columns */
-    background: #fff; /* Background color for content */
-    padding: 20px;
-    border-radius: 8px;
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
+  5% {
+    transform: translate(8px, -14px);
   }
   
-  /* Company logo and basic information */
-  .company-header {
-    display: flex;
-    align-items: center;
-    gap: 15px;
+  10% {
+    transform: translate(15px, -10px);
   }
   
-  .company-logo {
-    width: 100px;
-    height: 100px;
-    border-radius: 8px;
+  17% {
+    transform: translate(23px, -24px);
   }
   
-  .company-info {
-    margin-top: 15px;
+  20% {
+    transform: translate(30px, -20px);
   }
   
-  .social-icons {
-    display: flex;
-    gap: 10px;
-    margin-top: 10px;
+  27% {
+    transform: translate(38px, -34px);
   }
   
-  /* Blocks styling */
-  .company-details,
-  .tech-stacks,
-  .industry,
-  .contacts,
-  .similar-companies {
-    background: #fff;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
+  30% {
+    transform: translate(45px, -30px);
   }
   
-  /* Specific styles for Company Details */
-  .company-details {
-    grid-area: company-details;
-    max-height: 300px; /* Adjust this value as needed */
-    overflow-y: auto; /* Adds a scrollbar if content exceeds max height */
+  37% {
+    transform: translate(53px, -44px);
   }
   
-  /* Industry block with max height and scrollable content */
-  .industry {
-    grid-area: industry;
-    max-height: 300px; /* Adjust this value as needed */
-    overflow-y: auto; /* Adds a scrollbar if content exceeds max height */
+  40% {
+    transform: translate(60px, -40px);
   }
   
-  /* Similar Companies block with max height and scrollable content */
-  .similar-companies {
-    grid-area: similar-companies;
-    max-height: 300px; /* Adjust this value as needed */
-    overflow-y: auto; /* Adds a scrollbar if content exceeds max height */
+  50% {
+    transform: translate(60px, 0);
   }
   
-  /* Tech Stack block is placed in the middle column */
-  .tech-stacks {
-    grid-area: tech-stacks;
+  57% {
+    transform: translate(53px, -14px);
   }
   
-  /* Contacts block is placed at the right end column */
-  .contacts {
-    grid-area: contacts;
+  60% {
+    transform: translate(45px, -10px);
   }
   
-  /* Reducing gap between blocks in the first column */
-  .company-details {
-    margin-bottom: 10px; /* Reduce bottom margin to bring blocks closer */
+  67% {
+    transform: translate(37px, -24px);
   }
   
-  .industry {
-    margin-bottom: 10px; /* Reduce bottom margin to bring blocks closer */
+  70% {
+    transform: translate(30px, -20px);
   }
   
-  /* Lists inside Tech Stack and Industry */
-  .stack-list,
-  .industry-list {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
+  77% {
+    transform: translate(22px, -34px);
   }
   
-  .tech-item,
-  .industry-item {
-    background: #e9ecef;
-    padding: 5px 10px;
-    border-radius: 5px;
+  80% {
+    transform: translate(15px, -30px);
   }
   
-  /* Contact cards layout */
-  .contact-card {
-    border: 1px solid #ddd;
-    padding: 15px;
-    margin-bottom: 10px;
-    border-radius: 8px;
-    background-color: #fff; /* Make sure the background is white */
+  87% {
+    transform: translate(7px, -44px);
   }
   
-  .contact-card h3 {
-    margin-bottom: 10px;
-    font-size: 1.2rem;
+  90% {
+    transform: translate(0, -40px);
   }
   
-  .contact-card p {
-    margin: 5px 0;
+  100% {
+    transform: translate(0, 0);
+  }
+}
+
+@-webkit-keyframes barUp1 {
+  0% {
+    transform: scale(1, 0.2);
   }
   
-  .contact-card a {
-    color: #005BFB;
-    text-decoration: none;
+  40% {
+    transform: scale(1, 0.2);
   }
   
-  .contact-card a:hover {
-    text-decoration: underline;
+  50% {
+    transform: scale(1, 1);
   }
   
-  /* Similar Companies block styling */
-  .similar-companies ul {
-    list-style: none;
-    padding-left: 0;
+  90% {
+    transform: scale(1, 1);
   }
   
-  .similar-companies li {
-    padding: 5px 0;
+  100% {
+    transform: scale(1, 0.2);
+  }
+}
+
+@keyframes barUp1 {
+  0% {
+    transform: scale(1, 0.2);
   }
   
+  40% {
+    transform: scale(1, 0.2);
+  }
+  
+  50% {
+    transform: scale(1, 1);
+  }
+  
+  90% {
+    transform: scale(1, 1);
+  }
+  
+  100% {
+    transform: scale(1, 0.2);
+  }
+}
+
+@-webkit-keyframes barUp2 {
+  0% {
+    transform: scale(1, 0.4);
+  }
+  
+  40% {
+    transform: scale(1, 0.4);
+  }
+  
+  50% {
+    transform: scale(1, 0.8);
+  }
+  
+  90% {
+    transform: scale(1, 0.8);
+  }
+  
+  100% {
+    transform: scale(1, 0.4);
+  }
+}
+
+@keyframes barUp2 {
+  0% {
+    transform: scale(1, 0.4);
+  }
+  
+  40% {
+    transform: scale(1, 0.4);
+  }
+  
+  50% {
+    transform: scale(1, 0.8);
+  }
+  
+  90% {
+    transform: scale(1, 0.8);
+  }
+  
+  100% {
+    transform: scale(1, 0.4);
+  }
+}
+
+@-webkit-keyframes barUp3 {
+  0% {
+    transform: scale(1, 0.6);
+  }
+  
+  100% {
+    transform: scale(1, 0.6);
+  }
+}
+
+@keyframes barUp3 {
+  0% {
+    transform: scale(1, 0.6);
+  }
+  
+  100% {
+    transform: scale(1, 0.6);
+  }
+}
+
+@-webkit-keyframes barUp4 {
+  0% {
+    transform: scale(1, 0.8);
+  }
+  
+  40% {
+    transform: scale(1, 0.8);
+  }
+  
+  50% {
+    transform: scale(1, 0.4);
+  }
+  
+  90% {
+    transform: scale(1, 0.4);
+  }
+  
+  100% {
+    transform: scale(1, 0.8);
+  }
+}
+
+@keyframes barUp4 {
+  0% {
+    transform: scale(1, 0.8);
+  }
+  
+  40% {
+    transform: scale(1, 0.8);
+  }
+  
+  50% {
+    transform: scale(1, 0.4);
+  }
+  
+  90% {
+    transform: scale(1, 0.4);
+  }
+  
+  100% {
+    transform: scale(1, 0.8);
+  }
+}
+
+@-webkit-keyframes barUp5 {
+  0% {
+    transform: scale(1, 1);
+  }
+  
+  40% {
+    transform: scale(1, 1);
+  }
+  
+  50% {
+    transform: scale(1, 0.2);
+  }
+  
+  90% {
+    transform: scale(1, 0.2);
+  }
+  
+  100% {
+    transform: scale(1, 1);
+  }
+}
+
+@keyframes barUp5 {
+  0% {
+    transform: scale(1, 1);
+  }
+  
+  40% {
+    transform: scale(1, 1);
+  }
+  
+  50% {
+    transform: scale(1, 0.2);
+  }
+  
+  90% {
+    transform: scale(1, 0.2);
+  }
+  
+  100% {
+    transform: scale(1, 1);
+  }
+}
+.loader-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh; /* Full height of the viewport */
+  background-color: #EAEEF9; /* Optional: match the background color */
+}

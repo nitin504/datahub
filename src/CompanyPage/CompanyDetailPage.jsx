@@ -11,6 +11,8 @@ export const CompanyDetailPage = () => {
   const { companyName } = useParams();
   const [companyDetails, setCompanyDetails] = useState(null);
   const [error, setError] = useState(null);
+  const [copiedText, setCopiedText] = useState('');
+  const [showTooltip, setShowTooltip] = useState({});
 
   useEffect(() => {
     const fetchCompanyDetails = async () => {
@@ -29,13 +31,35 @@ export const CompanyDetailPage = () => {
     fetchCompanyDetails();
   }, [companyName]);
 
+  const handleCopyToClipboard = (text, index) => {
+    navigator.clipboard.writeText(text).then(() => {
+      setCopiedText(text);
+      setShowTooltip((prev) => ({ ...prev, [index]: true }));
+      setTimeout(() => {
+        setShowTooltip((prev) => ({ ...prev, [index]: false }));
+      }, 2000); // Tooltip will be shown for 2 seconds
+    });
+  };
+
   if (error) {
     return <div>Error: {error}</div>;
   }
 
   if (!companyDetails) {
-    return <div>Loading...</div>;
+    return (
+      <div className="loader-container">
+        <div className="loader">
+          <div className="loader__bar"></div>
+          <div className="loader__bar"></div>
+          <div className="loader__bar"></div>
+          <div className="loader__bar"></div>
+          <div className="loader__bar"></div>
+          <div className="loader__ball"></div>
+        </div>
+      </div>
+    );
   }
+  
 
   return (
     <div>
@@ -67,7 +91,12 @@ export const CompanyDetailPage = () => {
         {/* Company Details */}
         <div className="company-details">
           <h2>Company Details</h2>
-          <p><strong>Phone:</strong> {companyDetails.phone}</p>
+          <p>
+            <strong>Phone:</strong> 
+            <span onClick={() => handleCopyToClipboard(companyDetails.phone)} style={{ cursor: 'pointer' }}>
+              <FontAwesomeIcon icon={faPhone} /> {companyDetails.phone}
+            </span>
+          </p>
           <p><strong>Domain Rank:</strong> {companyDetails.domainRank}</p>
           <p><strong>Year Founded:</strong> {companyDetails.yearFounded}</p>
           <p><strong>Employee Count:</strong> {companyDetails.employeeCount}</p>
@@ -99,16 +128,13 @@ export const CompanyDetailPage = () => {
                   </a>
                 </h3>
                 <p>{contact.Designation}</p>
-                <p>
-                  <a href={`mailto:${contact["Email ID"]}`}>
-                    <FontAwesomeIcon icon={faEnvelope} /> {contact["Email ID"]}
-                  </a>
+                <p onClick={() => handleCopyToClipboard(contact["Email ID"], index)} className="contact-info" style={{ cursor: 'pointer' }}>
+                  <FontAwesomeIcon icon={faEnvelope} /> {contact["Email ID"]}
                 </p>
-                <p>
-                  <a href={`tel:${contact["Company Ph. No."]}`}>
-                    <FontAwesomeIcon icon={faPhone} /> {contact["Company Ph. No."]}
-                  </a>
+                <p onClick={() => handleCopyToClipboard(contact["Company Ph. No."], index)} className="contact-info" style={{ cursor: 'pointer' }}>
+                  <FontAwesomeIcon icon={faPhone} /> {contact["Company Ph. No."]}
                 </p>
+                {showTooltip[index] && <div className="tooltip">Copied: {copiedText}</div>}
               </div>
             ))
           ) : (
