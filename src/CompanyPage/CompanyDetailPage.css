@@ -18,17 +18,22 @@
   background: #fff; /* Background color for content */
   padding: 20px;
   border-radius: 8px;
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
+  display: flex; /* Use flexbox for layout */
+  gap: 20px; /* Gap between header and info */
 }
 
-/* Company logo and basic information */
+/* Company Header */
 .company-header {
   display: flex;
-  align-items: center;
-  gap: 15px;
+  flex-direction: column; /* Keep items in a column */
+  flex: 1; /* Take equal space */
 }
+
+.company-info {
+  flex: 1; /* Take equal space */
+  margin-top: 0; /* Remove margin-top for alignment */
+}
+
 
 .company-logo {
   width: 100px;
@@ -36,9 +41,6 @@
   border-radius: 8px;
 }
 
-.company-info {
-  margin-top: 15px;
-}
 
 .social-icons {
   display: flex;
@@ -521,4 +523,19 @@
   align-items: center;
   height: 100vh; /* Full height of the viewport */
   background-color: #EAEEF9; /* Optional: match the background color */
+}
+
+.advance-view-button {
+  padding: 8px 12px; /* Adjust padding for smaller size */
+  font-size: 0.9rem; /* Slightly smaller font size */
+  background-color: #005BFB; /* Keep the background color */
+  color: white; /* Text color */
+  border: none; /* Remove default border */
+  border-radius: 4px; /* Rounded corners */
+  cursor: pointer; /* Pointer cursor on hover */
+  transition: background-color 0.3s; /* Smooth transition for hover */
+}
+
+.advance-view-button:hover {
+  background-color: #004bb5; /* Darker shade on hover */
 }
