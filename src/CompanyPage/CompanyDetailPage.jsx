@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react'; 
-import { useParams } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { useParams, useNavigate } from 'react-router-dom'; // Import useNavigate
 import Header from '../components/Header';
 import './CompanyDetailPage.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -13,6 +13,7 @@ export const CompanyDetailPage = () => {
   const [error, setError] = useState(null);
   const [copiedText, setCopiedText] = useState('');
   const [showTooltip, setShowTooltip] = useState({});
+  const navigate = useNavigate(); // Initialize useNavigate
 
   useEffect(() => {
     const fetchCompanyDetails = async () => {
@@ -41,9 +42,19 @@ export const CompanyDetailPage = () => {
     });
   };
 
+  const handleAdvanceView = () => {
+    // Navigate to the CompanyAdvance page with the company name as a parameter
+    navigate(`/company/${encodeURIComponent(companyName)}/advance`);
+  };
+
   if (error) {
-    return <div>Error: {error}</div>;
-  }
+    return (
+        <div>
+            <p>Error: {error}</p>
+            <button onClick={fetchCompanyDetails}>Retry</button>
+        </div>
+    );
+}
 
   if (!companyDetails) {
     return (
@@ -59,7 +70,6 @@ export const CompanyDetailPage = () => {
       </div>
     );
   }
-  
 
   return (
     <div>
@@ -80,10 +90,14 @@ export const CompanyDetailPage = () => {
                 </a>
               )}
             </div>
+            {/* Advanced View Button */}
+            <button className="advance-view-button" onClick={handleAdvanceView}>
+              Advanced View
+            </button>
           </div>
           <div className="company-info">
             <p>{companyDetails.description}</p>
-            <p><strong>Location:</strong> {companyDetails.location}</p>
+            <p><strong>Location:</strong> {companyDetails.state}</p>
             <p><strong>Revenue:</strong> ${companyDetails.annualRevenue}</p>
           </div>
         </div>
