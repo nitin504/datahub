@@ -10,7 +10,6 @@ const Header = () => {
     <header className="header">
       <span>Datahub.ai</span>
       <div className="header__user">
-<<<<<<< HEAD
         <button className="header__help">Help</button>
         {isAuthenticated ? (
           <button onClick={() => logout({ returnTo: window.location.origin })}>
@@ -19,13 +18,6 @@ const Header = () => {
         ) : (
           <button onClick={loginWithRedirect}>Login</button>
         )}
-=======
-        <Link to="/help" className="header__help">Help</Link>
-        <Link to="/feedback" className="header__feedback">Feedback</Link>
-        <div className="header__avatar" onClick={onAvatarClick}>
-          {isLoggedIn ? userInitials : '?'}
-        </div>
->>>>>>> fca592999d5e00e0dac2b5f071c6f55752b2e112
       </div>
     </header>
   );
