@@ -1,20 +1,17 @@
-// src/App.jsx
 import React, { useState, useRef, useEffect } from "react";
 import { SearchBar } from "./components/SearchBar";
 import { SearchResultsList } from "./components/SearchResultsList";
 import Header from './components/Header';
-import LoginSignup from './UserPage/LoginSignup';
 import "./App.css";
 import { CompanyList } from "./components/CompanyList";
+import { useAuth0 } from "@auth0/auth0-react"; // Import Auth0 hook
 
 const App = () => {
+  const { isAuthenticated } = useAuth0(); // Get authentication status from Auth0
   const [results, setResults] = useState([]);
   const [inputValue, setInputValue] = useState('');
   const [companyListResults, setCompanyListResults] = useState([]);
   const [showResults, setShowResults] = useState(false);
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [username, setUsername] = useState('');
-  const [showLoginSignup, setShowLoginSignup] = useState(false);
   const searchBarRef = useRef(null);
   const resultsRef = useRef(null);
 
@@ -62,51 +59,53 @@ const App = () => {
     setShowResults(show);
   };
 
-  const handleAvatarClick = () => {
-    if (!isLoggedIn) {
-      setShowLoginSignup(true);
-    }
-  };
-
-  const handleLogin = (username) => {
-    setIsLoggedIn(true);
-    setUsername(username);
-    setShowLoginSignup(false);
-  };
-
   return (
     <div className='App'>
-      <Header 
-        isLoggedIn={isLoggedIn}
-        userInitials={username ? username.charAt(0).toUpperCase() : ''}
-        onAvatarClick={handleAvatarClick}
-      />
-      <div className='search-bar-container' ref={searchBarRef}>
-        <SearchBar
-          setResults={setResults}
-          inputValue={inputValue}
-          setInputValue={setInputValue}
-          onSearch={handleSearch}
-          onResultsToggle={handleResultsDisplay}
-          onFocus={handleSearchBarFocus}
-        />
-        {showResults && (
-          <div
-            ref={resultsRef}
-            className={`search-results-container`}
-          >
-            <SearchResultsList results={results} inputValue={inputValue} />
+      <Header />
+
+      {/* Conditionally render based on authentication status */}
+      {isAuthenticated ? (
+        <>
+          <div className='search-bar-container' ref={searchBarRef}>
+            <SearchBar
+              setResults={setResults}
+              inputValue={inputValue}
+              setInputValue={setInputValue}
+              onSearch={handleSearch}
+              onResultsToggle={handleResultsDisplay}
+              onFocus={handleSearchBarFocus}
+            />
+            {showResults && (
+              <div ref={resultsRef} className="search-results-container">
+                <SearchResultsList results={results} inputValue={inputValue} />
+              </div>
+            )}
           </div>
-        )}
-      </div>
-      <div className="company-list-container">
-        <CompanyList results={companyListResults} />
-      </div>
-      {showLoginSignup && (
-        <LoginSignup 
-          onLogin={handleLogin}
-          onClose={() => setShowLoginSignup(false)}
-        />
+          <div className="company-list-container">
+            <CompanyList results={companyListResults} />
+          </div>
+        </>
+      ) : (
+        <>
+          <div className='search-bar-container' ref={searchBarRef}>
+            <SearchBar
+              setResults={setResults}
+              inputValue={inputValue}
+              setInputValue={setInputValue}
+              onSearch={handleSearch}
+              onResultsToggle={handleResultsDisplay}
+              onFocus={handleSearchBarFocus}
+            />
+            {showResults && (
+              <div ref={resultsRef} className="search-results-container">
+                <SearchResultsList results={results} inputValue={inputValue} />
+              </div>
+            )}
+          </div>
+          <div className="company-list-container">
+            <CompanyList results={companyListResults} />
+          </div>
+        </>
       )}
     </div>
   );

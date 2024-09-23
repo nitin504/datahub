@@ -1,11 +1,13 @@
 import React, { useState } from 'react';
 import MUIDataTable from "mui-datatables";
 import "./CompanyList.css";
-import { createTheme, ThemeProvider } from '@mui/material/styles'
+import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { useNavigate } from 'react-router-dom';
+import { useAuth0 } from '@auth0/auth0-react'; // Import Auth0 hook
 
 export const CompanyList = ({ results }) => {
   const navigate = useNavigate();
+  const { isAuthenticated, loginWithRedirect } = useAuth0(); // Get authentication status
 
   const [expandedRows, setExpandedRows] = useState([]);
 
@@ -47,7 +49,19 @@ export const CompanyList = ({ results }) => {
         filter: false,
         sort: true,
         customBodyRender: (value) => (
-          <span className="CompanyName" onClick={() => navigate(`/company/${encodeURIComponent(value)}`)}>{value}</span>
+          <span 
+            className="CompanyName" 
+            onClick={() => {
+              if (isAuthenticated) {
+                navigate(`/company/${encodeURIComponent(value)}`); // Navigate to company detail page if authenticated
+              } else {
+                alert("Please log in to view company details.");
+                loginWithRedirect();
+              }
+            }}
+          >
+            {value}
+          </span>
         )
       }
     },
@@ -133,16 +147,12 @@ export const CompanyList = ({ results }) => {
             head: {
               padding: '10px 4px',
               backgroundColor: '#F5F7FC',
-
             },
             body: {
               padding: '7px 15px',
               ":hover": {
                 backgroundColor: '#F5F7FC',
               }
-            },
-            footer: {
-
             },
           },
         },
