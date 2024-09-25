@@ -1,0 +1,53 @@
+/* CompanyDiagram.css */
+
+.company-diagram-container {
+    display: flex;
+    height: 100vh; /* Full viewport height */
+  }
+  
+  .diagram-wrapper {
+    flex: 2; /* Take up 2/3 of the width */
+    display: flex;
+    justify-content: center; /* Center diagram */
+    align-items: center; /* Center diagram */
+    position: relative;
+  }
+  
+  .large-diagram {
+    width: 80%; /* Set the width to 80% for a balanced look */
+    max-width: 400px; /* Limit max width */
+    margin: auto; /* Center it */
+  }
+  
+  .diagram-segment {
+    cursor: pointer;
+    transition: fill 0.3s ease;
+  }
+  
+  .diagram-segment:hover {
+    fill: #4f46e5; /* Highlight on hover */
+  }
+  
+  .diagram-center-content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+  }
+  
+  .company-name {
+    font-size: 1.5rem;
+    font-weight: bold;
+  }
+  
+  .company-website {
+    font-size: 1rem;
+    color: #1d4ed8;
+    text-decoration: none;
+  }
+  
+  .company-website:hover {
+    text-decoration: underline;
+  }
+  
