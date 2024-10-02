@@ -34,3 +34,40 @@
 .company-list-container {
   position: relative; /* Ensure it's in the normal document flow */
 }
+
+.placeholder-message {
+  text-align: center;
+  margin-top: 20px;
+  color: #666;
+}
+
+.placeholder-message h2 {
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+
+.placeholder-message p {
+  font-size: 16px;
+}
+
+/* Additional styles for the placeholder message */
+.placeholder-message {
+  text-align: center;
+  font-size: 18px;
+  color: #555;
+  margin-top: 20px;
+}
+
+.invisible-box {
+  display: none; /* Initially hide the box */
+}
+
+.placeholder-message h2 {
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+
+.invisible-box p {
+  font-size: 16px;
+  color: #666; /* Change color to fit your theme */
+}

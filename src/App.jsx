@@ -62,7 +62,6 @@ const App = () => {
   return (
     <div className='App'>
       <Header />
-
       {/* Conditionally render based on authentication status */}
       {isAuthenticated ? (
         <>
@@ -81,12 +80,15 @@ const App = () => {
               </div>
             )}
           </div>
-          {/* Conditionally render the table only if there are results */}
-          {companyListResults.length > 0 && (
-            <div className="company-list-container">
+          <div className="company-list-container">
+            {companyListResults.length > 0 ? (
               <CompanyList results={companyListResults} />
-            </div>
-          )}
+            ) : (
+              <div className="placeholder-message">
+                Start searching for companies to see the results here!
+              </div>
+            )}
+          </div>
         </>
       ) : (
         <>
@@ -105,12 +107,18 @@ const App = () => {
               </div>
             )}
           </div>
-          {/* Conditionally render the table only if there are results */}
-          {companyListResults.length > 0 && (
-            <div className="company-list-container">
+          <div className="company-list-container">
+            {companyListResults.length > 0 ? (
               <CompanyList results={companyListResults} />
-            </div>
-          )}
+            ) : (
+              <div className="placeholder-message">
+                No companies searched yet
+                <br />
+                <br />
+                Start searching for companies to see the results here!
+              </div>
+            )}
+          </div>
         </>
       )}
     </div>
