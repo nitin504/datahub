@@ -64,49 +64,24 @@ const App = () => {
       <Header />
 
       {/* Conditionally render based on authentication status */}
-      {isAuthenticated ? (
-        <>
-          <div className='search-bar-container' ref={searchBarRef}>
-            <SearchBar
-              setResults={setResults}
-              inputValue={inputValue}
-              setInputValue={setInputValue}
-              onSearch={handleSearch}
-              onResultsToggle={handleResultsDisplay}
-              onFocus={handleSearchBarFocus}
-            />
-            {showResults && (
-              <div ref={resultsRef} className="search-results-container">
-                <SearchResultsList results={results} inputValue={inputValue} />
-              </div>
-            )}
+      <div className='search-bar-container' ref={searchBarRef}>
+        <SearchBar
+          setResults={setResults}
+          inputValue={inputValue}
+          setInputValue={setInputValue}
+          onSearch={handleSearch}
+          onResultsToggle={handleResultsDisplay}
+          onFocus={handleSearchBarFocus}
+        />
+        {showResults && (
+          <div ref={resultsRef} className="search-results-container">
+            <SearchResultsList results={results} inputValue={inputValue} />
           </div>
-          <div className="company-list-container">
-            <CompanyList results={companyListResults} />
-          </div>
-        </>
-      ) : (
-        <>
-          <div className='search-bar-container' ref={searchBarRef}>
-            <SearchBar
-              setResults={setResults}
-              inputValue={inputValue}
-              setInputValue={setInputValue}
-              onSearch={handleSearch}
-              onResultsToggle={handleResultsDisplay}
-              onFocus={handleSearchBarFocus}
-            />
-            {showResults && (
-              <div ref={resultsRef} className="search-results-container">
-                <SearchResultsList results={results} inputValue={inputValue} />
-              </div>
-            )}
-          </div>
-          <div className="company-list-container">
-            <CompanyList results={companyListResults} />
-          </div>
-        </>
-      )}
+        )}
+      </div>
+      <div className="company-list-container">
+        <CompanyList results={companyListResults} />
+      </div>
     </div>
   );
 };
