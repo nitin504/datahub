@@ -24,8 +24,7 @@
   z-index: 10; /* Make sure it is above the CompanyList */
   background-color: white; /* Background to make it stand out */
   max-height: 300px; /* Adjust height as needed */
-  overflow-y: auto; /* Scroll if too many results */
-  display: none; /* Hidden by default */
+  overflow-y: auto; /* Scroll if too many results */ 
 }
 
 .search-results-container.show {
