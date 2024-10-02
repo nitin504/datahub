@@ -64,24 +64,55 @@ const App = () => {
       <Header />
 
       {/* Conditionally render based on authentication status */}
-      <div className='search-bar-container' ref={searchBarRef}>
-        <SearchBar
-          setResults={setResults}
-          inputValue={inputValue}
-          setInputValue={setInputValue}
-          onSearch={handleSearch}
-          onResultsToggle={handleResultsDisplay}
-          onFocus={handleSearchBarFocus}
-        />
-        {showResults && (
-          <div ref={resultsRef} className="search-results-container">
-            <SearchResultsList results={results} inputValue={inputValue} />
+      {isAuthenticated ? (
+        <>
+          <div className='search-bar-container' ref={searchBarRef}>
+            <SearchBar
+              setResults={setResults}
+              inputValue={inputValue}
+              setInputValue={setInputValue}
+              onSearch={handleSearch}
+              onResultsToggle={handleResultsDisplay}
+              onFocus={handleSearchBarFocus}
+            />
+            {showResults && (
+              <div ref={resultsRef} className="search-results-container">
+                <SearchResultsList results={results} inputValue={inputValue} />
+              </div>
+            )}
           </div>
-        )}
-      </div>
-      <div className="company-list-container">
-        <CompanyList results={companyListResults} />
-      </div>
+          {/* Conditionally render the table only if there are results */}
+          {companyListResults.length > 0 && (
+            <div className="company-list-container">
+              <CompanyList results={companyListResults} />
+            </div>
+          )}
+        </>
+      ) : (
+        <>
+          <div className='search-bar-container' ref={searchBarRef}>
+            <SearchBar
+              setResults={setResults}
+              inputValue={inputValue}
+              setInputValue={setInputValue}
+              onSearch={handleSearch}
+              onResultsToggle={handleResultsDisplay}
+              onFocus={handleSearchBarFocus}
+            />
+            {showResults && (
+              <div ref={resultsRef} className="search-results-container">
+                <SearchResultsList results={results} inputValue={inputValue} />
+              </div>
+            )}
+          </div>
+          {/* Conditionally render the table only if there are results */}
+          {companyListResults.length > 0 && (
+            <div className="company-list-container">
+              <CompanyList results={companyListResults} />
+            </div>
+          )}
+        </>
+      )}
     </div>
   );
 };
