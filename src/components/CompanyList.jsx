@@ -1,18 +1,18 @@
+// src/components/CompanyList.jsx
 import React, { useState } from 'react';
 import MUIDataTable from "mui-datatables";
 import "./CompanyList.css";
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { useNavigate } from 'react-router-dom';
-import { useAuth0 } from '@auth0/auth0-react'; // Import Auth0 hook
+import { useAuth0 } from '@auth0/auth0-react';
 
 export const CompanyList = ({ results }) => {
   const navigate = useNavigate();
-  const { isAuthenticated, loginWithRedirect } = useAuth0(); // Get authentication status
-
-  const [expandedRows, setExpandedRows] = useState([]);
+  const { isAuthenticated, loginWithRedirect } = useAuth0();
+  const [expandedRowIndices, setExpandedRowIndices] = useState([]);
 
   const handleToggleExpand = (index) => {
-    setExpandedRows(prevState =>
+    setExpandedRowIndices(prevState =>
       prevState.includes(index)
         ? prevState.filter(row => row !== index)
         : [...prevState, index]
@@ -22,7 +22,7 @@ export const CompanyList = ({ results }) => {
   const renderTechStack = (value, tableMeta) => {
     const techStack = value.split(', ');
     const maxVisible = 5;
-    const isExpanded = expandedRows.includes(tableMeta.rowIndex);
+    const isExpanded = expandedRowIndices.includes(tableMeta.rowIndex);
 
     if (isExpanded) {
       return (
@@ -53,8 +53,9 @@ export const CompanyList = ({ results }) => {
             className="CompanyName" 
             onClick={() => {
               if (isAuthenticated) {
-                navigate(`/company/${encodeURIComponent(value)}`); // Navigate to company detail page if authenticated
+                navigate(`/company/${encodeURIComponent(value)}`);
               } else {
+                // Consider using a toast or inline message instead of alert
                 alert("Please log in to view company details.");
                 loginWithRedirect();
               }
