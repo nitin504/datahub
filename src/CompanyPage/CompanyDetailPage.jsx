@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useParams, useNavigate } from 'react-router-dom'; // Import useNavigate
+import { useParams, useNavigate } from 'react-router-dom'; 
 import Header from '../components/Header';
 import './CompanyDetailPage.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -13,7 +13,7 @@ export const CompanyDetailPage = () => {
   const [error, setError] = useState(null);
   const [copiedText, setCopiedText] = useState('');
   const [showTooltip, setShowTooltip] = useState({});
-  const navigate = useNavigate(); // Initialize useNavigate
+  const navigate = useNavigate(); 
 
   useEffect(() => {
     const fetchCompanyDetails = async () => {
@@ -38,12 +38,12 @@ export const CompanyDetailPage = () => {
       setShowTooltip((prev) => ({ ...prev, [index]: true }));
       setTimeout(() => {
         setShowTooltip((prev) => ({ ...prev, [index]: false }));
-      }, 2000); // Tooltip will be shown for 2 seconds
+      }, 2000); 
     });
   };
 
   const handleAdvanceView = () => {
-    // Pass the company details as state to the advanced page
+    
     navigate(`/company/${encodeURIComponent(companyName)}/advance`, {
       state: { companyDetails },
     });
@@ -73,7 +73,6 @@ export const CompanyDetailPage = () => {
     <div>
       <Header />
       <div className="company-detail-container">
-        {/* Company Overview */}
         <div className="company-overview">
           <div className="company-header">
             <img src={companyDetails.logoUrl} alt={companyDetails.companyName} className="company-logo" />
@@ -88,7 +87,6 @@ export const CompanyDetailPage = () => {
                 </a>
               )}
             </div>
-            {/* Advanced View Button */}
             <button className="advance-view-button" onClick={handleAdvanceView}>
               Advanced View
             </button>
@@ -100,7 +98,6 @@ export const CompanyDetailPage = () => {
           </div>
         </div>
 
-        {/* Company Details */}
         <div className="company-details">
           <h2>Company Details</h2>
           <p>
@@ -114,7 +111,6 @@ export const CompanyDetailPage = () => {
           <p><strong>Employee Count:</strong> {companyDetails.employeeCount}</p>
         </div>
 
-        {/* Tech Stack */}
         <div className="tech-stacks">
           <h2>Tech Stack</h2>
           <div className="stack-list">
@@ -128,7 +124,6 @@ export const CompanyDetailPage = () => {
           </div>
         </div>
 
-        {/* Contacts */}
         <div className="contacts">
           <h2>Contacts</h2>
           {companyDetails.contactPersons && companyDetails.contactPersons.length > 0 ? (
@@ -154,13 +149,11 @@ export const CompanyDetailPage = () => {
           )}
         </div>
 
-        {/* Industry */}
         <div className="industry">
           <h2>Industry</h2>
           <p>{companyDetails.industry || 'No Industry information available'}</p>
         </div>
 
-        {/* Similar Companies */}
         <div className="similar-companies">
           <h2>Similar Companies</h2>
           <ul>

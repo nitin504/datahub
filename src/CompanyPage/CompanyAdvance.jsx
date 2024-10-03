@@ -1,16 +1,15 @@
 import React from 'react';
-import { useLocation } from 'react-router-dom'; // Import useLocation to get state
+import { useLocation } from 'react-router-dom'; 
 import CompanyDiagram from './CompanyDiagram';
 import Header from '../components/Header';
 
 const CompanyAdvance = () => {
   const location = useLocation();
-  const { companyDetails } = location.state || {}; // Get company details from the state
+  const { companyDetails } = location.state || {}; 
 
   return (
     <div className="CompanyAdvance">
       <Header />
-      {/* Pass company details to CompanyDiagram if available */}
       {companyDetails ? (
         <CompanyDiagram companyDetails={companyDetails} />
       ) : (

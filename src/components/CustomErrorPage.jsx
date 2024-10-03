@@ -1,7 +1,6 @@
-// src/components/CustomErrorPage.jsx
 import React from 'react';
 import { Link } from 'react-router-dom';
-import './CustomErrorPage.css'; // Create a CSS file for styling
+import './CustomErrorPage.css'; 
 
 const CustomErrorPage = () => {
   return (

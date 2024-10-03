@@ -61,7 +61,6 @@ const CompanyDiagram = ({ companyDetails }) => {
               const labelX = 50 + 30 * Math.cos((midAngle * Math.PI) / 180);
               const labelY = 50 + 30 * Math.sin((midAngle * Math.PI) / 180);
 
-              // Adjust font size based on length of segment name
               const fontSize = segment.name.length > 7 ? '2.5' : '3.5';
 
               return (
@@ -79,7 +78,7 @@ const CompanyDiagram = ({ companyDetails }) => {
                     textAnchor="middle"
                     dominantBaseline="middle"
                     className="diagram-label"
-                    style={{ fontSize: fontSize, fill: 'white' }} // Adjusted font size here
+                    style={{ fontSize: fontSize, fill: 'white' }} 
                   >
                     {segment.name}
                   </text>

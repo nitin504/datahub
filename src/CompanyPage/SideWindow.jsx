@@ -1,5 +1,5 @@
 import React from 'react';
-import './SideWindow.css'; // Add styles for sliding animation
+import './SideWindow.css'; 
 
 const SideWindow = ({ isOpen, title, content, onClose }) => {
   return (

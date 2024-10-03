@@ -3,7 +3,6 @@ import { FaSearch } from "react-icons/fa";
 import "./SearchBar.css";
 import API_BASE_URL from '../apiConfig';
 
-// Utility function to debounce a function
 const debounce = (func, delay) => {
   let timeoutId;
   return (...args) => {
@@ -15,7 +14,6 @@ const debounce = (func, delay) => {
 export const SearchBar = ({ setResults, inputValue, setInputValue, onSearch, onResultsToggle }) => {
   const [input, setInput] = useState("");
 
-  // Debounced version of companyData
   const debouncedCompanyData = useRef(debounce(async (value) => {
     try {
       const response = await fetch(API_BASE_URL);
@@ -24,9 +22,9 @@ export const SearchBar = ({ setResults, inputValue, setInputValue, onSearch, onR
       }
       const companyData = await response.json();
       const results = searchJSONData(companyData, value);
-      console.log("Filtered results:", results); // Debugging log
+      console.log("Filtered results:", results); 
       setResults(results);
-      onResultsToggle(true); // Show results when data is fetched
+      onResultsToggle(true); 
     } catch (error) {
       console.error("Failed to fetch company data:", error);
       setResults([]);
@@ -48,16 +46,16 @@ export const SearchBar = ({ setResults, inputValue, setInputValue, onSearch, onR
   };
   
 
-  //some change kuuch kra hai
+  
 
   const handleChange = (value) => {
     setInput(value);
     setInputValue(value);
     if (value) {
-      debouncedCompanyData(value); // Use debounced function
+      debouncedCompanyData(value); 
     } else {
       setResults([]);
-      onResultsToggle(false); // Hide results if input is empty
+      onResultsToggle(false); 
     }
   };
 

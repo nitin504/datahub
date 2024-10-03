@@ -1,10 +1,10 @@
 .company-detail-container {
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr; /* 3 equal columns */
-  gap: 20px; /* Gap between columns and rows */
+  grid-template-columns: 1fr 1fr 1fr; 
+  gap: 20px; 
   padding: 20px;
-  background-color: #EAEEF9; /* Background color for the gap */
-  grid-template-rows: auto; /* Let rows height be adjusted by their content */
+  background-color: #EAEEF9; 
+  grid-template-rows: auto; 
   grid-template-areas:
     "company-overview company-overview company-overview"
     "company-details tech-stacks contacts"
@@ -12,10 +12,9 @@
     "similar-companies tech-stacks contacts";
 }
 
-/* Company Overview spans across all columns */
 .company-overview {
-  grid-area: company-overview; /* Spans all columns */
-  background: #fff; /* Background color for content */
+  grid-area: company-overview; 
+  background: #fff; 
   padding: 20px;
   border-radius: 8px;
   display: flex;
@@ -23,7 +22,6 @@
   gap: 20px;
 }
 
-/* Company logo and basic information */
 .company-header {
   display: flex;
   align-items: center;
@@ -46,7 +44,6 @@
   margin-top: 10px;
 }
 
-/* Blocks styling */
 .company-details,
 .tech-stacks,
 .industry,
@@ -61,47 +58,42 @@
   gap: 15px;
 }
 
-/* Specific styles for Company Details */
 .company-details {
   grid-area: company-details;
-  max-height: 300px; /* Adjust this value as needed */
-  overflow-y: auto; /* Adds a scrollbar if content exceeds max height */
+  max-height: 300px;
+  overflow-y: auto; 
 }
 
-/* Industry block with max height and scrollable content */
 .industry {
   grid-area: industry;
-  max-height: 300px; /* Adjust this value as needed */
-  overflow-y: auto; /* Adds a scrollbar if content exceeds max height */
+  max-height: 300px; 
+  overflow-y: auto; 
 }
 
-/* Similar Companies block with max height and scrollable content */
 .similar-companies {
   grid-area: similar-companies;
-  max-height: 300px; /* Adjust this value as needed */
-  overflow-y: auto; /* Adds a scrollbar if content exceeds max height */
+  max-height: 300px; 
+  overflow-y: auto;
 }
 
-/* Tech Stack block is placed in the middle column */
 .tech-stacks {
   grid-area: tech-stacks;
 }
 
-/* Contacts block is placed at the right end column */
 .contacts {
   grid-area: contacts;
 }
 
-/* Reducing gap between blocks in the first column */
+
 .company-details {
-  margin-bottom: 10px; /* Reduce bottom margin to bring blocks closer */
+  margin-bottom: 10px; 
 }
 
 .industry {
-  margin-bottom: 10px; /* Reduce bottom margin to bring blocks closer */
+  margin-bottom: 10px; 
 }
 
-/* Lists inside Tech Stack and Industry */
+
 .stack-list,
 .industry-list {
   display: flex;
@@ -116,13 +108,13 @@
   border-radius: 5px;
 }
 
-/* Contact cards layout */
+
 .contact-card {
   border: 1px solid #ddd;
   padding: 15px;
   margin-bottom: 10px;
   border-radius: 8px;
-  background-color: #fff; /* Make sure the background is white */
+  background-color: #fff; 
 }
 
 .contact-card h3 {
@@ -143,7 +135,6 @@
   text-decoration: underline;
 }
 
-/* Similar Companies block styling */
 .similar-companies ul {
   list-style: none;
   padding-left: 0;
@@ -154,7 +145,7 @@
 }
 
 .copy-feedback {
-  color: green; /* Or whatever color you prefer */
+  color: green; 
   margin-top: 5px;
   font-size: 0.9rem;
   transition: opacity 0.5s ease;
@@ -171,14 +162,13 @@
 }
 
 .contact-info {
-  color: #005BFB; /* Blue color for email and phone */
+  color: #005BFB; 
 }
 
 .contact-info:hover {
-  text-decoration: underline; /* Underline on hover for better UX */
+  text-decoration: underline; 
 }
 
-/* Loader Styles */
 .loader {
   position: relative;
   width: 75px;
@@ -519,6 +509,6 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh; /* Full height of the viewport */
-  background-color: #EAEEF9; /* Optional: match the background color */
+  height: 100vh; 
+  background-color: #EAEEF9; 
 }

@@ -1,4 +1,3 @@
-// src/UserPage/LoginSignup.jsx
 import React, { useState } from 'react';
 import './LoginSignup.css';
 
@@ -11,24 +10,19 @@ const LoginSignup = ({ onLogin, onClose }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (isLogin) {
-      // Implement login logic here
       onLogin(username);
     } else {
-      // Implement signup logic here
       onLogin(username);
     }
   };
 
   const handleGoogleLogin = () => {
-    // Implement actual Google login logic here
     console.log('Google login clicked!');
-    onLogin('Google User'); // Simulating login after Google auth
+    onLogin('Google User'); 
   };
 
   const handleForgotPassword = () => {
-    // Implement actual forgot password logic here
     console.log('Forgot password clicked!');
-    // Optionally, you can redirect to a password reset page or show a modal
   };
 
   return (

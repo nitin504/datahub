@@ -14,22 +14,22 @@
 }
 
 .MuiFormControl-root {
-  display: flex; /* Aligns label and input vertically */
-  flex-direction: column; /* Stacks them */
+  display: flex; 
+  flex-direction: column; 
 }
 
 .MuiFormLabel-root {
-  margin-bottom: 4px; /* Space between label and input */
+  margin-bottom: 4px; 
 }
 
 .MuiInputBase-root {
-  margin-top: 0; /* Remove any margin that might push dropdown down */
+  margin-top: 0; 
 }
 
 .MuiSelect-select {
-  padding: 10px; /* Better spacing in the dropdown */
-  display: flex; /* Align items inside the dropdown */
-  align-items: center; /* Center items vertically */
+  padding: 10px; 
+  display: flex; 
+  align-items: center; 
 }
 
 .expand-button {

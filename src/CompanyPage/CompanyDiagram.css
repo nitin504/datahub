@@ -1,22 +1,22 @@
-/* CompanyDiagram.css */
+
 
 .company-diagram-container {
     display: flex;
-    height: 100vh; /* Full viewport height */
+    height: 100vh; 
   }
   
   .diagram-wrapper {
-    flex: 2; /* Take up 2/3 of the width */
+    flex: 2; 
     display: flex;
-    justify-content: center; /* Center diagram */
-    align-items: center; /* Center diagram */
+    justify-content: center; 
+    align-items: center; 
     position: relative;
   }
   
   .large-diagram {
-    width: 80%; /* Set the width to 80% for a balanced look */
-    max-width: 400px; /* Limit max width */
-    margin: auto; /* Center it */
+    width: 80%; 
+    max-width: 400px; 
+    margin: auto; 
   }
   
   .diagram-segment {
@@ -25,7 +25,7 @@
   }
   
   .diagram-segment:hover {
-    fill: #4f46e5; /* Highlight on hover */
+    fill: #4f46e5; 
   }
   
   .diagram-center-content {

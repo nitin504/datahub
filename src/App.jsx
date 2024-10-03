@@ -4,10 +4,10 @@ import { SearchResultsList } from "./components/SearchResultsList";
 import Header from './components/Header';
 import "./App.css";
 import { CompanyList } from "./components/CompanyList";
-import { useAuth0 } from "@auth0/auth0-react"; // Import Auth0 hook
+import { useAuth0 } from "@auth0/auth0-react"; 
 
 const App = () => {
-  const { isAuthenticated } = useAuth0(); // Get authentication status from Auth0
+  const { isAuthenticated } = useAuth0(); 
   const [results, setResults] = useState([]);
   const [inputValue, setInputValue] = useState('');
   const [companyListResults, setCompanyListResults] = useState([]);
@@ -62,7 +62,6 @@ const App = () => {
   return (
     <div className='App'>
       <Header />
-      {/* Conditionally render based on authentication status */}
       {isAuthenticated ? (
         <>
           <div className='search-bar-container' ref={searchBarRef}>

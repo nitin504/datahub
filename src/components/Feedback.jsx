@@ -1,6 +1,5 @@
-// src/components/Feedback.jsx
 import React, { useState } from 'react';
-import Header from './Header'; // Import Header
+import Header from './Header'; 
 import './Feedback.css';
 
 const Feedback = () => {

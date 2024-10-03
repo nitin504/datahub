@@ -1,4 +1,3 @@
-// src/components/CompanyList.jsx
 import React, { useState } from 'react';
 import MUIDataTable from "mui-datatables";
 import "./CompanyList.css";
@@ -55,7 +54,6 @@ export const CompanyList = ({ results }) => {
               if (isAuthenticated) {
                 navigate(`/company/${encodeURIComponent(value)}`);
               } else {
-                // Consider using a toast or inline message instead of alert
                 alert("Please log in to view company details.");
                 loginWithRedirect();
               }

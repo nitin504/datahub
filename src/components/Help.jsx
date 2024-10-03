@@ -1,6 +1,5 @@
-// src/components/Help.jsx
 import React, { useState } from 'react';
-import Header from './Header'; // Import Header
+import Header from './Header'; 
 import './Help.css';
 
 const Help = () => {
@@ -17,7 +16,6 @@ const Help = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Handle form submission logic here
     alert("Thank you for reaching out! We'll get back to you soon.");
   };
 
