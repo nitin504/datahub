@@ -93,7 +93,7 @@ export const CompanyDetailPage = () => {
           </div>
           <div className="company-info">
             <p>{companyDetails.description}</p>
-            <p><strong>Location:</strong> {companyDetails.location}</p>
+            <p><strong>Location:</strong> {companyDetails.state}</p>
             <p><strong>Revenue:</strong> ${companyDetails.annualRevenue}</p>
           </div>
         </div>
