@@ -53,3 +53,7 @@
 .CompanyName:hover {
   cursor: pointer;
 }
+.MuiFormControl-root {
+  padding: 25px !important;
+}
+

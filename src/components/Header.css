@@ -9,6 +9,14 @@
   background: #FFFFFF;
 }
 
+.header__title {
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #333;
+  cursor: pointer;
+  text-decoration: none; /* Ensures link styling is consistent */
+}
+
 .header span {
   font-size: 1.2rem;
   font-weight: bold;
