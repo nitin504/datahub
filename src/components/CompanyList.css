@@ -53,3 +53,19 @@
 .CompanyName:hover {
   cursor: pointer;
 }
+.MuiFormControl-root {
+  padding: 25px !important;
+}
+
+.MuiTablePagination-selectLabel {
+  margin-top: 17px; /* Adjust the value as needed */
+  
+}
+
+.MuiTablePagination-displayedRows {
+  margin-top: 15px; /* Adjust the value as needed */
+}
+
+.MuiTablePagination-displayedRows {
+  margin-top: 17px; /* Adjust the value as needed */
+}

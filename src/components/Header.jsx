@@ -25,7 +25,7 @@ const Header = () => {
 
   return (
     <header className="header">
-      <span>Datahub.ai</span>
+      <Link to="/" className="header__title">Datahub.ai</Link>
       <div className="header__user">
         <Link to="/help" className="header__help">Help</Link>
 
