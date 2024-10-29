@@ -9,7 +9,7 @@ export const SearchResult = ({ result }) => {
 
   const handleClick = () => {
     if (isAuthenticated) {
-      navigate(`/company/${encodeURIComponent(result.companyName)}`); 
+      navigate(`/company/${encodeURIComponent(result.companyName)}`);
     } else {
       alert("Please log in to view company details.");
       loginWithRedirect();

@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
 import './CompanyDiagram.css';
 import SideWindow from './SideWindow';
-import API_BASE_URL from '../apiConfig';
+import {API_BASE_URL} from '../apiConfig';
 
 const segments = [
   { name: "Industry", color: "#1e3a8a" },
   { name: "Revenue", color: "#1e40af" },
-  { name: "Tech Stack", color: "#1d4ed8" },
+  { name: "TechStack", color: "#1d4ed8" },
   { name: "Vendors", color: "#2563eb" },
   { name: "Contacts", color: "#3b82f6" },
   { name: "Others", color: "#60a5fa" },
@@ -20,13 +20,77 @@ const CompanyDiagram = ({ companyDetails }) => {
 
   const fetchSegmentData = async (segmentName) => {
     setLoading(true);
+    console.log(segmentName);
     try {
-      const response = await fetch(`${API_BASE_URL}/company/${encodeURIComponent(companyDetails.companyName)}/${segmentName.toLowerCase()}`);
+      const encodedCompanyName = encodeURIComponent(companyDetails.companyName);
+      const response = await fetch(`${API_BASE_URL}/${encodedCompanyName}`);
       if (!response.ok) {
-        throw new Error(`Error ${response.status}: Failed to fetch ${segmentName} data`);
+        throw new Error(`Error ${response.status}: Failed to fetch company data`);
       }
+
       const data = await response.json();
-      setSegmentData(data);
+
+      console.log("Fetched data:", data);
+
+      const results = {
+        Vendors: data.continuedListOfVendors || "No data available",
+        Contacts: data.contactPersons || "No data available",
+        Others: {
+          internalITTeam: data.internalITTeam ? "Yes" : "No",
+          jobVacancy: data.jobVacancy || "No data available",
+          jobVacancyTechStack: data.jobVacancyTechStack || "No data available"
+        },
+        Industry: data.industry || "No data available",
+        Revenue: data.annualRevenue ? `$${data.annualRevenue} million` : "No data available",
+        TechStack: data.techStack && data.techStack.length > 0 ? data.techStack : "No data available"
+      };
+
+      if (segmentName === "Others") {
+        const othersData = results.Others;
+        const formattedData = Object.keys(othersData).map((key) => {
+          return (
+            <div key={key}>
+              <strong>{key}:</strong> {othersData[key]}
+            </div>
+          );
+        });
+
+        setSegmentData(
+          othersData.internalITTeam !== "No data available" ||
+          othersData.jobVacancy !== "No data available" ||
+          othersData.jobVacancyTechStack !== "No data available"
+            ? formattedData
+            : "No data available for this segment."
+        );
+      } 
+      else if (segmentName === "Contacts") {
+        const contactsData = results.Contacts;
+        const formattedData = Array.isArray(contactsData)
+          ? contactsData.map((contact, index) => (
+              <div key={index}>
+                {Object.keys(contact).map((key) => (
+                  <div key={key}>
+                    <strong>{key}:</strong> {contact[key]}
+                  </div>
+                ))}
+              </div>
+            ))
+          : "No data available for this segment.";
+        setSegmentData(formattedData);
+      } 
+
+      else if (segmentName === "TechStack") {
+        const techStackData = results.TechStack;
+        const formattedData = Array.isArray(techStackData)
+          ? techStackData.map((tech, index) => (
+              <div key={index}>{tech}</div>
+            ))
+          : "No data available for this segment.";
+        setSegmentData(formattedData);
+      } 
+      else {
+        setSegmentData(results[segmentName] || "No data available for this segment.");
+      }
     } catch (error) {
       setSegmentData(`Error fetching ${segmentName} data: ${error.message}`);
     } finally {

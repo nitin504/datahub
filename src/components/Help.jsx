@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
 import Header from './Header'; 
 import './Help.css';
+import {API_BASE_URL_HF} from '../apiConfig';
 
 const Help = () => {
   const [formData, setFormData] = useState({
+    topic: '',
     firstName: '',
     lastName: '',
     email: '',
@@ -16,7 +18,37 @@ const Help = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    alert("Thank you for reaching out! We'll get back to you soon.");
+
+    fetch(`${API_BASE_URL_HF}/help/send-query`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(formData),
+    })
+      .then(response => {
+        if (response.ok) {
+          return response.json();
+        } else {
+          console.log(`${API_BASE_URL_HF}/help/send-query`)
+          console.log(response);
+          throw new Error("Network response was not ok");
+        }
+      })
+      .then(data => {
+        alert("Thank you for reaching out! We'll get back to you soon.");
+        setFormData({
+          topic: '',
+          firstName: '',
+          lastName: '',
+          email: '',
+          message: '',
+        });
+      })
+      .catch(error => {
+        console.error('Error:', error);
+        alert("There was an error submitting your query. Please try again later.");
+      });
   };
 
   return (
@@ -30,6 +62,8 @@ const Help = () => {
           <input 
             type="text" 
             name="topic" 
+            value={formData.topic}  
+            onChange={handleChange}
             placeholder="Your topic of discussion" 
             required 
           />

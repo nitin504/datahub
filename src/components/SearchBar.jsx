@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import { FaSearch } from "react-icons/fa";
 import "./SearchBar.css";
-import API_BASE_URL from '../apiConfig';
+import {API_BASE_URL} from '../apiConfig';
 
 const debounce = (func, delay) => {
   let timeoutId;
@@ -22,7 +22,6 @@ export const SearchBar = ({ setResults, inputValue, setInputValue, onSearch, onR
       }
       const companyData = await response.json();
       const results = searchJSONData(companyData, value);
-      console.log("Filtered results:", results); 
       setResults(results);
       onResultsToggle(true); 
     } catch (error) {

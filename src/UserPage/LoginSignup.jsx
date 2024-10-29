@@ -17,13 +17,9 @@ const LoginSignup = ({ onLogin, onClose }) => {
   };
 
   const handleGoogleLogin = () => {
-    console.log('Google login clicked!');
     onLogin('Google User'); 
   };
 
-  const handleForgotPassword = () => {
-    console.log('Forgot password clicked!');
-  };
 
   return (
     <div className="login-signup-overlay">

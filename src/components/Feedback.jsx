@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import Header from './Header'; 
 import './Feedback.css';
+import {API_BASE_URL_HF} from '../apiConfig';
+
 
 const Feedback = () => {
   const [formData, setFormData] = useState({
@@ -17,7 +19,32 @@ const Feedback = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    setSubmitted(true);
+
+    fetch(`${API_BASE_URL_HF}/feedback/send-feedback`, {  // Update with full API route
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(formData),
+    })
+      .then(response => {
+        if (response.ok) {
+          setSubmitted(true);
+          // Optionally reset form data here if needed
+          setFormData({
+            email: '',
+            subject: '',
+            message: '',
+            scale: 10,
+          });
+        } else {
+          throw new Error("Network response was not ok");
+        }
+      })
+      .catch(error => {
+        console.error('Error:', error);
+        alert("There was an error submitting your feedback. Please try again later.");
+      });
   };
 
   if (submitted) {

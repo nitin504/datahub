@@ -5,7 +5,7 @@ import './CompanyDetailPage.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEnvelope, faPhone, faGlobe } from '@fortawesome/free-solid-svg-icons';
 import { faLinkedin } from '@fortawesome/free-brands-svg-icons';
-import API_BASE_URL from '../apiConfig';
+import {API_BASE_URL} from '../apiConfig';
 
 export const CompanyDetailPage = () => {
   const { companyName } = useParams();
