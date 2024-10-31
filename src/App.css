@@ -71,3 +71,12 @@
   font-size: 16px;
   color: #666; /* Change color to fit your theme */
 }
+
+.verification-message {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  height: 100vh;
+  font-size: 2.25rem; /* Adjusts to medium text size */
+}

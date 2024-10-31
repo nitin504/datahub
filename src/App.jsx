@@ -7,7 +7,7 @@ import { CompanyList } from "./components/CompanyList";
 import { useAuth0 } from "@auth0/auth0-react"; 
 
 const App = () => {
-  const { isAuthenticated } = useAuth0(); 
+  const { isAuthenticated, user, logout } = useAuth0();
   const [results, setResults] = useState([]);
   const [inputValue, setInputValue] = useState('');
   const [companyListResults, setCompanyListResults] = useState([]);
@@ -63,62 +63,54 @@ const App = () => {
     <div className='App'>
       <Header />
       {isAuthenticated ? (
-        <>
-          <div className='search-bar-container' ref={searchBarRef}>
-            <SearchBar
-              setResults={setResults}
-              inputValue={inputValue}
-              setInputValue={setInputValue}
-              onSearch={handleSearch}
-              onResultsToggle={handleResultsDisplay}
-              onFocus={handleSearchBarFocus}
-            />
-            {showResults && (
-              <div ref={resultsRef} className="search-results-container">
-                <SearchResultsList results={results} inputValue={inputValue} />
-              </div>
-            )}
+        user.email_verified ? (
+          <>
+            <div className='search-bar-container' ref={searchBarRef}>
+              <SearchBar
+                setResults={setResults}
+                inputValue={inputValue}
+                setInputValue={setInputValue}
+                onSearch={handleSearch}
+                onResultsToggle={handleResultsDisplay}
+                onFocus={handleSearchBarFocus}
+              />
+              {showResults && (
+                <div ref={resultsRef} className="search-results-container">
+                  <SearchResultsList results={results} inputValue={inputValue} />
+                </div>
+              )}
+            </div>
+            <div className="company-list-container">
+              {companyListResults.length > 0 ? (
+                <CompanyList results={companyListResults} />
+              ) : (
+                <div className="placeholder-message">
+                  Start searching for companies to see the results here!
+                </div>
+              )}
+            </div>
+          </>
+        ) : (
+          <div className="verification-message">
+            <p>Please check your inbox and follow the link to confirm your email address before you continue</p>
           </div>
-          <div className="company-list-container">
-            {companyListResults.length > 0 ? (
-              <CompanyList results={companyListResults} />
-            ) : (
-              <div className="placeholder-message">
-                Start searching for companies to see the results here!
-              </div>
-            )}
-          </div>
-        </>
+        )
       ) : (
-        <>
-          <div className='search-bar-container' ref={searchBarRef}>
-            <SearchBar
-              setResults={setResults}
-              inputValue={inputValue}
-              setInputValue={setInputValue}
-              onSearch={handleSearch}
-              onResultsToggle={handleResultsDisplay}
-              onFocus={handleSearchBarFocus}
-            />
-            {showResults && (
-              <div ref={resultsRef} className="search-results-container">
-                <SearchResultsList results={results} inputValue={inputValue} />
-              </div>
-            )}
-          </div>
-          <div className="company-list-container">
-            {companyListResults.length > 0 ? (
-              <CompanyList results={companyListResults} />
-            ) : (
-              <div className="placeholder-message">
-                No companies searched yet
-                <br />
-                <br />
-                Start searching for companies to see the results here!
-              </div>
-            )}
-          </div>
-        </>
+        <div className='search-bar-container' ref={searchBarRef}>
+          <SearchBar
+            setResults={setResults}
+            inputValue={inputValue}
+            setInputValue={setInputValue}
+            onSearch={handleSearch}
+            onResultsToggle={handleResultsDisplay}
+            onFocus={handleSearchBarFocus}
+          />
+          {showResults && (
+            <div ref={resultsRef} className="search-results-container">
+              <SearchResultsList results={results} inputValue={inputValue} />
+            </div>
+          )}
+        </div>
       )}
     </div>
   );
