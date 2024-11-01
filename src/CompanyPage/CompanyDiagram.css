@@ -50,4 +50,10 @@
   .company-website:hover {
     text-decoration: underline;
   }
+  .tooltip {
+    display: inline-block;
+    margin-left: 5px;
+    color: green;
+    font-weight: bold;
+  }
   
