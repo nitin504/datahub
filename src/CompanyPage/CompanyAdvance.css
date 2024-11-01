@@ -1,0 +1,11 @@
+.CompanyAdvance {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh; /* Fills the full height of the viewport */
+    overflow-y: hidden; /* Prevents unnecessary scrolling */
+  }
+  
+  .CompanyAdvance > * {
+    flex-shrink: 0; /* Prevents child elements from shrinking */
+  }
+  

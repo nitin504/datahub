@@ -2,6 +2,7 @@ import React from 'react';
 import { useLocation } from 'react-router-dom'; 
 import CompanyDiagram from './CompanyDiagram';
 import Header from '../components/Header';
+import './CompanyAdvance.css';
 
 const CompanyAdvance = () => {
   const location = useLocation();

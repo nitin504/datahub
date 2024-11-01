@@ -1,23 +1,48 @@
 
 
 .company-diagram-container {
-    display: flex;
-    height: 100vh; 
-  }
+  display: flex;
+  height: 90vh;
+  overflow: hidden; /* Prevent scrolling */
+  align-items: center; /* Center vertically */
+  justify-content: flex-start; /* Align to the left */
+}
+
+.diagram-wrapper {
+  flex: 2;
+  display: flex;
+  justify-content: flex-start; /* Align SVG to the left */
+  align-items: center;
+  position: relative;
+  padding-left: 20%; /* Optional: add some space from the screen edge */
+  height: 100%; /* Keep within full viewport height */
+}
+
+.large-diagram {
+  width: 100%; /* Set width to fill the container */
+  height: 100%; /* Set height to fill the container */
+  max-width: 600px;; /* Remove any max-width constraint */
+  max-height: 600px;; /* Remove any max-height constraint */
+  margin: 0; /* Remove auto-centering margin */
+}
   
-  .diagram-wrapper {
-    flex: 2; 
-    display: flex;
-    justify-content: center; 
-    align-items: center; 
-    position: relative;
-  }
-  
-  .large-diagram {
-    width: 80%; 
-    max-width: 400px; 
-    margin: auto; 
-  }
+.relative {
+  position: relative; /* Keep this for positioning child elements */
+}
+
+.diagram-center-content {
+  display: flex; /* Use flex to center content */
+  justify-content: center; /* Center items horizontally */
+  align-items: center; /* Center items vertically */
+  position: absolute; /* Change to absolute positioning */
+  top: 0; /* Align to the top of the relative container */
+  left: 0; /* Align to the left of the relative container */
+  width: 100%; /* Make it fill the width of the parent */
+  height: 100%; /* Make it fill the height of the parent */
+  pointer-events: none; /* Ensures clicks go through to SVG segments */
+}
+
+
   
   .diagram-segment {
     cursor: pointer;
@@ -28,24 +53,18 @@
     fill: #4f46e5; 
   }
   
-  .diagram-center-content {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    text-align: center;
-  }
-  
-  .company-name {
-    font-size: 1.5rem;
-    font-weight: bold;
-  }
-  
-  .company-website {
-    font-size: 1rem;
-    color: #1d4ed8;
-    text-decoration: none;
-  }
+.company-name {
+  font-size: 1.5rem;
+  font-weight: bold;
+  fill: black; /* Text color */
+}
+
+.company-website {
+  font-size: 1rem;
+  fill: #1d4ed8; /* Link color */
+  text-decoration: none;
+}
+
   
   .company-website:hover {
     text-decoration: underline;
@@ -77,3 +96,40 @@
     color: #333; 
   }
   
+  .others-item {
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+    font-size: 1rem;
+    color: #333;
+    display: inline-block;
+    padding-right: 10px; /* Adjust spacing between label and content */
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 8px; /* Optional: add spacing between items */
+  }
+
+.value-content {
+  display: inline-block;
+  margin-left: 5px;
+  flex: 1; /* Takes up remaining space */
+    white-space: pre-wrap; /* Allows line breaks in jobVacancy items */
+
+}
+
+.others-item strong {
+    color: #1d4ed8;
+    font-weight: bold;
+    display: inline-block;
+    width: 180px;
+    text-align: left;
+}
+
+.others-item:last-child {
+  border-bottom: none;
+}
+
+.job-vacancy-item {
+    margin-left: 10px; /* Slight indentation for each job role */
+    padding: 2px 0;
+}
+

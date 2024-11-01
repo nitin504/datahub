@@ -1,18 +1,19 @@
 .side-window {
-    position: fixed;
-    top: 60px; 
-    right: -33.33%; 
-    width: 33.33%; 
-    height: calc(83.33% - 60px); 
-    background-color: #F7F9FF; 
-    box-shadow: -2px 0 5px rgba(0, 0, 0, 0.3);
-    transition: right 0.3s ease;
-    z-index: 1000;
-  }
-  
-  .side-window.open {
-    right: 0; 
-  }
+  position: fixed;
+  top: 80px; /* Adjust this value to match your header height */
+  right: -33.33%;
+  width: 33.33%;
+  height: calc(90vh - 80px); /* Adjust to header height */
+  background-color: #F7F9FF;
+  box-shadow: -2px 0 5px rgba(0, 0, 0, 0.3);
+  transition: right 0.3s ease;
+  z-index: 1000;
+}
+
+.side-window.open {
+  right: 0;
+}
+
   
   .side-window-header {
     display: flex;
@@ -38,7 +39,7 @@
   
   .side-window-content {
     padding: 20px;
-    max-height: calc(100% - 50px); 
+    max-height: calc(90% - 50px); 
     overflow-y: auto; 
   }
   .side-window-title {

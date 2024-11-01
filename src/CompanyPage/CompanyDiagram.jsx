@@ -48,13 +48,28 @@ const CompanyDiagram = ({ companyDetails }) => {
       if (segmentName === "Others") {
         const othersData = results.Others;
         const formattedData = Object.keys(othersData).map((key) => {
+          let displayValue = othersData[key];
+      
+          // For jobVacancy, format each role in a new line
+          if (key === "jobVacancy") {
+            displayValue = displayValue
+              .split(/\d+\./)
+              .filter((item) => item.trim() !== "")
+              .map((job, index) => (
+                <div key={index} className="job-vacancy-item">
+                  {index + 1}. {job.trim()}
+                </div>
+              ));
+          }
+      
           return (
-            <div key={key}>
-              <strong>{key}:</strong> {othersData[key]}
+            <div key={key} className="others-item">
+              <strong>{key}:</strong>
+              <span className="value-content">{displayValue}</span>
             </div>
           );
         });
-
+      
         setSegmentData(
           othersData.internalITTeam !== "No data available" ||
           othersData.jobVacancy !== "No data available" ||
@@ -62,7 +77,11 @@ const CompanyDiagram = ({ companyDetails }) => {
             ? formattedData
             : "No data available for this segment."
         );
-      } 
+      }
+      
+      
+
+      
       else if (segmentName === "Contacts") {
         const contactsData = results.Contacts;
         const formattedData = Array.isArray(contactsData)
@@ -128,7 +147,7 @@ const CompanyDiagram = ({ companyDetails }) => {
     <div className="company-diagram-container">
       <div className="diagram-wrapper">
         <div className="relative large-diagram">
-          <svg viewBox="0 0 100 100" className="diagram-svg" role="img" aria-label="Company Diagram">
+          <svg viewBox="0 0 100 100" className="diagram-svg" role="img" aria-label="Company Diagram" preserveAspectRatio="xMidYMid meet">
             {segments.map((segment, index) => {
               const startAngle = index * 60;
               const endAngle = (index + 1) * 60;
@@ -162,6 +181,7 @@ const CompanyDiagram = ({ companyDetails }) => {
                     {segment.name}
                   </text>
                 </g>
+                
               );
             })}
             <circle cx="50" cy="50" r="20" fill="white" />
