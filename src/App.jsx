@@ -7,7 +7,7 @@ import { CompanyList } from "./components/CompanyList";
 import { useAuth0 } from "@auth0/auth0-react"; 
 
 const App = () => {
-  const { isAuthenticated, user, logout } = useAuth0();
+  const { isAuthenticated, user, logout, loginWithRedirect } = useAuth0();
   const [results, setResults] = useState([]);
   const [inputValue, setInputValue] = useState('');
   const [companyListResults, setCompanyListResults] = useState([]);
@@ -35,18 +35,23 @@ const App = () => {
 
     const handleEnterKey = (event) => {
       if (event.key === "Enter") {
-        setShowResults(false);
+        if (isAuthenticated) {
+          setShowResults(true); 
+        } else {
+          alert("Please log in to view company details.");
+          loginWithRedirect();
+        }
       }
     };
-
+  
     document.addEventListener("mousedown", handleClickOutside);
     document.addEventListener("keydown", handleEnterKey);
-
+  
     return () => {
       document.removeEventListener("mousedown", handleClickOutside);
       document.removeEventListener("keydown", handleEnterKey);
     };
-  }, []);
+  }, [isAuthenticated, loginWithRedirect]);
 
   const handleSearchBarFocus = () => {
     if (inputValue) {
