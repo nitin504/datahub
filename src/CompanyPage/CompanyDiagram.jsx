@@ -67,17 +67,25 @@ const CompanyDiagram = ({ companyDetails }) => {
         const contactsData = results.Contacts;
         const formattedData = Array.isArray(contactsData)
           ? contactsData.map((contact, index) => (
-              <div key={index}>
+              <div key={index} className="contact-card">
                 {Object.keys(contact).map((key) => (
                   <div key={key}>
-                    <strong>{key}:</strong> {contact[key]}
+                    <strong>{key}:</strong>{" "}
+                    {key === "LinkedIn" ? (
+                      <a href={contact[key]} target="_blank" rel="noopener noreferrer">
+                        {contact[key]}
+                      </a>
+                    ) : (
+                      contact[key]
+                    )}
                   </div>
                 ))}
               </div>
             ))
           : "No data available for this segment.";
         setSegmentData(formattedData);
-      } 
+      }
+      
 
       else if (segmentName === "TechStack") {
         const techStackData = results.TechStack;
