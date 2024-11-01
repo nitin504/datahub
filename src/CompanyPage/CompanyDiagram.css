@@ -57,3 +57,23 @@
     font-weight: bold;
   }
   
+  .tech-card {
+    border: 1px solid #ddd; 
+    border-radius: 8px; 
+    padding: 16px; 
+    margin: 8px; 
+    background-color: #f9f9f9; 
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); 
+    transition: transform 0.2s; 
+  }
+  
+  .tech-card:hover {
+    transform: scale(1.05); 
+  }
+  
+  .tech-card h4 {
+    margin: 0; 
+    font-size: 1.2em; 
+    color: #333; 
+  }
+  

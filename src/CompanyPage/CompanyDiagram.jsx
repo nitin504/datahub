@@ -1,7 +1,7 @@
-import React, { useState } from "react";
-import "./CompanyDiagram.css";
-import SideWindow from "./SideWindow";
-import { API_BASE_URL } from "../apiConfig";
+import React, { useState } from 'react';
+import './CompanyDiagram.css';
+import SideWindow from './SideWindow';
+import {API_BASE_URL} from '../apiConfig';
 
 const segments = [
   { name: "Industry", color: "#1e3a8a" },
@@ -14,19 +14,23 @@ const segments = [
 
 const CompanyDiagram = ({ companyDetails }) => {
   const [activeSegment, setActiveSegment] = useState(null);
-  const [segmentData, setSegmentData] = useState("");
+  const [segmentData, setSegmentData] = useState('');
   const [isOpen, setIsOpen] = useState(false);
   const [loading, setLoading] = useState(false);
 
   const fetchSegmentData = async (segmentName) => {
     setLoading(true);
+    console.log(segmentName);
     try {
       const encodedCompanyName = encodeURIComponent(companyDetails.companyName);
       const response = await fetch(`${API_BASE_URL}/${encodedCompanyName}`);
       if (!response.ok) {
         throw new Error(`Error ${response.status}: Failed to fetch company data`);
       }
+
       const data = await response.json();
+
+      console.log("Fetched data:", data);
 
       const results = {
         Vendors: data.continuedListOfVendors || "No data available",
@@ -34,14 +38,32 @@ const CompanyDiagram = ({ companyDetails }) => {
         Others: {
           internalITTeam: data.internalITTeam ? "Yes" : "No",
           jobVacancy: data.jobVacancy || "No data available",
-          jobVacancyTechStack: data.jobVacancyTechStack || "No data available",
+          jobVacancyTechStack: data.jobVacancyTechStack || "No data available"
         },
         Industry: data.industry || "No data available",
         Revenue: data.annualRevenue ? `$${data.annualRevenue} million` : "No data available",
-        TechStack: data.techStack && data.techStack.length > 0 ? data.techStack : "No data available",
+        TechStack: data.techStack && data.techStack.length > 0 ? data.techStack : "No data available"
       };
 
-      if (segmentName === "Contacts") {
+      if (segmentName === "Others") {
+        const othersData = results.Others;
+        const formattedData = Object.keys(othersData).map((key) => {
+          return (
+            <div key={key}>
+              <strong>{key}:</strong> {othersData[key]}
+            </div>
+          );
+        });
+
+        setSegmentData(
+          othersData.internalITTeam !== "No data available" ||
+          othersData.jobVacancy !== "No data available" ||
+          othersData.jobVacancyTechStack !== "No data available"
+            ? formattedData
+            : "No data available for this segment."
+        );
+      } 
+      else if (segmentName === "Contacts") {
         const contactsData = results.Contacts;
         const formattedData = Array.isArray(contactsData)
           ? contactsData.map((contact, index) => (
@@ -66,7 +88,22 @@ const CompanyDiagram = ({ companyDetails }) => {
             ))
           : "No data available for this segment.";
         setSegmentData(formattedData);
-      } else {
+      }
+      
+
+      else if (segmentName === "TechStack") {
+        const techStackData = results.TechStack;
+        const formattedData = Array.isArray(techStackData)
+          ? techStackData.map((tech, index) => (
+              <div key={index} className="tech-card">
+                <h4>{tech}</h4> {/* Display the tech stack item */}
+              </div>
+            ))
+          : "No data available for this segment.";
+        setSegmentData(formattedData);
+      }
+       
+      else {
         setSegmentData(results[segmentName] || "No data available for this segment.");
       }
     } catch (error) {
@@ -91,12 +128,7 @@ const CompanyDiagram = ({ companyDetails }) => {
     <div className="company-diagram-container">
       <div className="diagram-wrapper">
         <div className="relative large-diagram">
-          <svg
-            viewBox="0 0 100 100"
-            className="diagram-svg"
-            role="img"
-            aria-label="Company Diagram"
-          >
+          <svg viewBox="0 0 100 100" className="diagram-svg" role="img" aria-label="Company Diagram">
             {segments.map((segment, index) => {
               const startAngle = index * 60;
               const endAngle = (index + 1) * 60;
@@ -107,7 +139,8 @@ const CompanyDiagram = ({ companyDetails }) => {
               const y2 = 50 + 48 * Math.sin((endAngle * Math.PI) / 180);
               const labelX = 50 + 30 * Math.cos((midAngle * Math.PI) / 180);
               const labelY = 50 + 30 * Math.sin((midAngle * Math.PI) / 180);
-              const fontSize = segment.name.length > 7 ? "2.5" : "3.5";
+
+              const fontSize = segment.name.length > 7 ? '2.5' : '3.5';
 
               return (
                 <g key={segment.name} onClick={() => handleSegmentClick(segment)}>
@@ -116,7 +149,7 @@ const CompanyDiagram = ({ companyDetails }) => {
                     fill={segment.color}
                     className="diagram-segment"
                     aria-label={segment.name}
-                    style={{ cursor: "pointer" }}
+                    style={{ cursor: 'pointer' }}
                   />
                   <text
                     x={labelX}
@@ -124,7 +157,7 @@ const CompanyDiagram = ({ companyDetails }) => {
                     textAnchor="middle"
                     dominantBaseline="middle"
                     className="diagram-label"
-                    style={{ fontSize: fontSize, fill: "white" }}
+                    style={{ fontSize: fontSize, fill: 'white' }} 
                   >
                     {segment.name}
                   </text>
