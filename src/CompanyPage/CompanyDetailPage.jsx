@@ -93,7 +93,7 @@ export const CompanyDetailPage = () => {
             />
             <h1>{companyDetails.companyName}</h1>
             <a
-              href={companyDetails.website}
+              href={companyDetails.companyUrl}
               target="_blank"
               rel="noopener noreferrer"
             >
