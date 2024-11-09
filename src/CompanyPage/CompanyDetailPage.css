@@ -12,6 +12,16 @@
     "similar-companies tech-stacks contacts";
 }
 
+.clickable-company {
+  color: #007bff; 
+  cursor: pointer; 
+}
+
+.clickable-company:hover {
+  color: #0056b3;
+}
+
+
 .company-overview {
   grid-area: company-overview; 
   background: #fff; 

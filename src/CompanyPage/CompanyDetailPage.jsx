@@ -80,6 +80,12 @@ export const CompanyDetailPage = () => {
     );
   }
 
+  const handleSimilarCompanyClick = (companyName) => {
+    navigate(`/company/${encodeURIComponent(companyName)}`, {
+      state: { companyDetails },
+    });
+  };
+
   return (
     <div>
       <Header />
@@ -222,7 +228,15 @@ export const CompanyDetailPage = () => {
             companyDetails.similarCompanies.length > 0 ? (
               companyDetails.similarCompanies
                 .slice(0, 6)
-                .map((company, index) => <li key={index}>{company}</li>)
+                .map((company, index) => (
+                  <li
+                    key={index}
+                    onClick={() => handleSimilarCompanyClick(company)}
+                    className="clickable-company"
+                  >
+                    {company}
+                  </li>
+                ))
             ) : (
               <p>No Similar Companies available</p>
             )}
