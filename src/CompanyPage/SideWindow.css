@@ -14,10 +14,15 @@
   right: 0;
 }
 
+p {
+  font-size: 1.3rem;
+  margin-bottom: 20px;
+  color: #555;
+}
   
   .side-window-header {
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
     padding: 10px;
     background-color: #F7F9FF; 

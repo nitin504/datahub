@@ -29,7 +29,6 @@ export const CompanyDetailPage = () => {
         const data = await response.json();
         setCompanyDetails(data);
 
-        // Fetch similar companies
         const similarResponse = await fetch(
           `${API_BASE_URL}/${encodeURIComponent(companyName)}/similar`
         );
@@ -41,6 +40,8 @@ export const CompanyDetailPage = () => {
         setError(error.message);
       }
     };
+
+    window.scrollTo(0, 0);
 
     fetchCompanyDetails();
   }, [companyName]);

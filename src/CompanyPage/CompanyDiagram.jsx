@@ -159,7 +159,7 @@ const CompanyDiagram = ({ companyDetails }) => {
               const labelX = 50 + 30 * Math.cos((midAngle * Math.PI) / 180);
               const labelY = 50 + 30 * Math.sin((midAngle * Math.PI) / 180);
 
-              const fontSize = segment.name.length > 7 ? '2.5' : '3.5';
+              const fontSize = segment.name.length > 7 ? '2.5' : '3';
 
               return (
                 <g key={segment.name} onClick={() => handleSegmentClick(segment)}>
