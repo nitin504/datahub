@@ -9,7 +9,7 @@ const SideWindow = ({ isOpen, title, content, onClose }) => {
         <button onClick={onClose} className="close-button">X</button>
       </div>
       <div className="side-window-content">
-        <p>{content}</p>
+        <p className="diagram">{content}</p>
       </div>
     </div>
   );
